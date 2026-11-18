@@ -1,0 +1,106 @@
+{
+ "s01": [
+  "Here is a question about one company, Kestrel Dynamics, and its internal documents.",
+  "What caused the billing delay in March 2026?",
+  "Let's ask a general AI model.",
+  "It answers instantly. Confidently.",
+  "And it is completely made up."
+ ],
+ "s02": [
+  "Why did that happen?",
+  "An AI model learns from public text, up to a cutoff date.",
+  "It has never seen your company's private documents.",
+  "So it does what it was trained to do.",
+  "It predicts the next word that sounds most likely.",
+  "Each candidate word gets a probability, and a likely one wins.",
+  "But sounding right is not the same as being right.",
+  "This has a name. Hallucination."
+ ],
+ "s03": [
+  "The fix is surprisingly simple. Think of an exam.",
+  "A closed-book exam tests what you remember.",
+  "An open-book exam lets you look things up.",
+  "RAG turns every question into an open-book exam.",
+  "Before the AI answers, we find the right pages, and put them in front of it."
+ ],
+ "s04": [
+  "R. A. G. stands for three steps.",
+  "Retrieval. Search your documents for the passages that matter.",
+  "Augmented. Add those passages to the prompt.",
+  "Generation. The AI writes the answer, using only what we gave it.",
+  "Let's follow our question through each step."
+ ],
+ "s05": [
+  "But retrieval needs something to search, so we prepare ahead of time.",
+  "This project holds seven documents from Kestrel Dynamics.",
+  "A company overview, team charters, a security policy, and the March postmortem.",
+  "Each document is cut into smaller pieces, called chunks.",
+  "Seven documents become eleven chunks.",
+  "Why cut them? We want the exact paragraph that answers the question, not a whole file.",
+  "Every chunk is made searchable, and stored in one database."
+ ],
+ "s06": [
+  "Now our question arrives.",
+  "The system compares it against all eleven chunks.",
+  "Each chunk gets a score. How well does it match?",
+  "Sort by score, and keep the top six.",
+  "At the very top: the postmortem paragraph.",
+  "This project scores with three methods at once.",
+  "One matches words. One matches meaning. One follows connections.",
+  "Then it combines their votes. Each method gets its own chapter."
+ ],
+ "s07": [
+  "Step two. Augment.",
+  "We build a prompt. This is the actual text this project sends.",
+  "First, the rules.",
+  "Answer only from the passages. Cite them. And if the answer isn't there, say I don't know.",
+  "Then the six passages, each with a number.",
+  "And the question, at the very end."
+ ],
+ "s08": [
+  "Step three. Generation.",
+  "The model reads about eight hundred tokens of context, and writes.",
+  "An expired TLS certificate on the Atlas API gateway caused authentication failures.",
+  "So the billing job retried until it ran out of retries.",
+  "See the small one at the end? That is a citation.",
+  "It points to passage one, so you can check the answer yourself."
+ ],
+ "s09": [
+  "Put the two answers side by side.",
+  "Without retrieval: a confident guess.",
+  "With retrieval: the real cause, with proof.",
+  "Same model. The only difference is what we put in front of it."
+ ],
+ "s10": [
+  "A fair question. Why not skip the search, and paste every document into the prompt?",
+  "Three reasons.",
+  "Size. A model can only read so much at once, and a real company has thousands of documents, not seven.",
+  "Cost. You pay for every token the model reads, on every question.",
+  "Focus. Bury the right paragraph in a thousand pages, and the model is more likely to miss it.",
+  "And why not train the model on the documents instead?",
+  "Training is slow and expensive, and must be repeated whenever a document changes.",
+  "With RAG, a new document is searchable minutes after it arrives."
+ ],
+ "s11": [
+  "So every RAG system has two phases.",
+  "Phase one, ingestion, happens ahead of time.",
+  "Documents in. Chunks out. Stored and searchable.",
+  "Phase two, the query, happens every time someone asks.",
+  "Search. Build the prompt. Generate the answer, with citations."
+ ],
+ "s12": [
+  "And here it is, running in this project.",
+  "The same question, typed into the playground.",
+  "The answer, with its citation.",
+  "On the right, the passages it retrieved.",
+  "Each one shows its rank from every search method.",
+  "And the answer is marked grounded: one hundred percent."
+ ],
+ "s13": [
+  "One idea to keep.",
+  "The model does not learn your documents.",
+  "Every time, we find the right pages, and hand them over.",
+  "That is RAG. An open-book exam for AI.",
+  "Next chapter: how documents are cut into chunks, and why the cut matters."
+ ]
+}

@@ -1,0 +1,41 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #0a0a0a; font-family: Inter, sans-serif; overflow: hidden; }
+    #s12-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    #s12-shot { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .s12-hl { position: absolute; border: 4px solid #3b82f6; border-radius: 12px; }
+    #s12-cap { position: absolute; left: 150px; bottom: 90px; background: #fff; color: #09090b; font-size: 40px; font-weight: 700; padding: 18px 30px; border-radius: 14px; letter-spacing: -0.01em; }
+  </style>
+  <div id="root" data-composition-id="s12" data-width="1920" data-height="1080">
+    <div id="s12-cam" data-layout-allow-overflow>
+      <img id="s12-shot" src="assets/playground-answer.png" alt="The project's Playground answering the question" />
+      <div class="s12-hl" id="s12-h1" style="left:920px;top:96px;width:332px;height:52px"></div>
+      <div class="s12-hl" id="s12-h2" style="left:492px;top:148px;width:756px;height:112px"></div>
+      <div class="s12-hl" id="s12-h3" style="left:1290px;top:210px;width:408px;height:800px"></div>
+      <div class="s12-hl" id="s12-h4" style="left:1302px;top:250px;width:226px;height:30px"></div>
+      <div class="s12-hl" id="s12-h5" style="left:562px;top:220px;width:136px;height:24px"></div>
+    </div>
+    <div id="s12-cap">Your project · Playground</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // Camera: centre image point (px, py) at scale s.
+      const cam = (px, py, s, t, d = 1.0) => tl.to("#s12-cam", { x: 960 - px * s, y: 540 - py * s, scale: s, duration: d, ease: "power2.inOut" }, t);
+      tl.fromTo("#s12-cam", { opacity: 0, scale: 0.86, x: 134, y: 76 }, { opacity: 1, scale: 0.86, x: 134, y: 76, duration: 0.5, ease: "power2.out" }, 0.05);
+      tl.fromTo("#s12-cap", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 0.4);
+      tl.set(".s12-hl", { opacity: 0 }, 0);
+      const hl = (sel, t, len) => { tl.fromTo(sel, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.35, ease: "expo.out" }, t); tl.to(sel, { opacity: 0, duration: 0.25 }, t + len); };
+      tl.to("#s12-cap", { opacity: 0, duration: 0.25 }, {c1-0.2});
+      cam(1086, 122, 1.9, {c1}); hl("#s12-h1", {c1+0.9}, 2.3);
+      cam(870, 205, 1.6, {c2}); hl("#s12-h2", {c2+0.9}, 1.6);
+      cam(1494, 560, 1.0, {c3}); hl("#s12-h3", {c3+0.9}, 2.2);
+      cam(1440, 300, 2.2, {c4}); hl("#s12-h4", {c4+0.9}, 2.6);
+      cam(630, 232, 2.6, {c5}); hl("#s12-h5", {c5+0.9}, 3.5);
+      tl.to("#s12-cam", { x: 134, y: 76, scale: 0.86, duration: 1.0, ease: "power2.inOut" }, {D-1.4});
+      tl.to("#root", { backgroundColor: "#ffffff", duration: 0.4, ease: "power2.inOut" }, {D-0.45});
+      tl.to("#s12-cam", { opacity: 0, duration: 0.3, ease: "power3.in" }, {D-0.45});
+      window.__timelines["s12"] = tl;
+    })();
+  </script>
+</template>

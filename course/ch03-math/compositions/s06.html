@@ -1,0 +1,46 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s06-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s06-def { position: absolute; left: 150px; top: 190px; font-size: 38px; color: #52525b; font-weight: 500; opacity: 0; }
+    #s06-split { position: absolute; left: 150px; top: 290px; width: 1000px; height: 90px; display: flex; border-radius: 12px; overflow: hidden; opacity: 0; }
+    #s06-split div { display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 700; color: #fff; }
+    .s06-row { position: absolute; left: 150px; font-family: "JetBrains Mono", monospace; font-size: 64px; font-weight: 700; opacity: 0; }
+    .s06-row span { font-family: Inter, sans-serif; font-size: 40px; color: #71717a; font-weight: 600; display: inline-block; width: 300px; }
+    .s06-row b { color: #2563eb; }
+    #s06-line { position: absolute; left: 150px; top: 700px; width: 1100px; border-top: 4px solid #09090b; opacity: 0; }
+    #s06-tot { position: absolute; left: 150px; top: 720px; font-family: "JetBrains Mono", monospace; font-size: 80px; font-weight: 700; opacity: 0; }
+    #s06-tot span { font-family: Inter, sans-serif; font-size: 40px; color: #71717a; font-weight: 600; display: inline-block; width: 300px; }
+    #s06-tot b { color: #2563eb; }
+    #s06-form { position: absolute; left: 150px; top: 900px; font-size: 44px; font-weight: 700; opacity: 0; }
+    #s06-form code { font-family: "JetBrains Mono", monospace; color: #2563eb; margin-left: 20px; }
+  </style>
+  <div id="root" data-composition-id="s06" data-width="1920" data-height="1080">
+    <div id="s06-t">Weights</div>
+    <div id="s06-def">A weight is a multiplier: how much each item counts</div>
+    <div id="s06-split"><div style="width:70%;background:#09090b">exam · 0.7</div><div style="width:30%;background:#71717a">homework · 0.3</div></div>
+    <div class="s06-row" id="s06-r1" style="top:440px"><span>exam</span>0.7 × 80 = <b>56</b></div>
+    <div class="s06-row" id="s06-r2" style="top:570px"><span>homework</span>0.3 × 100 = <b>30</b></div>
+    <div id="s06-line"></div>
+    <div id="s06-tot"><span>total</span>56 + 30 = <b>86</b></div>
+    <div id="s06-form" data-hold>Weighted sum<code>Σ wᵢ × xᵢ</code></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s06-t", 0.05, 0.25);
+      inB("#s06-def", 4.207);
+      tl.fromTo("#s06-split", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, transformOrigin: "left center", duration: 0.7, ease: "expo.out" }, 9.868);
+      tl.fromTo(".s06-row", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, stagger: 1.2, ease: "expo.out" }, 15.881);
+      tl.set([".s06-row b"], { opacity: 0 }, 0);
+      tl.fromTo("#s06-r1 b", { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, 21.728);
+      tl.fromTo("#s06-r2 b", { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, 24.528);
+      tl.fromTo("#s06-line", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, transformOrigin: "left center", duration: 0.5, ease: "power3.inOut" }, 25.528);
+      inB("#s06-tot", 26.128);
+      inB("#s06-form", 30.27);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 34.63);
+      window.__timelines["s06"] = tl;
+    })();
+  </script>
+</template>

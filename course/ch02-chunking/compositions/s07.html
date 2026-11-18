@@ -1,0 +1,62 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s07-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s07-say { position: absolute; left: 150px; top: 180px; font-size: 34px; color: #52525b; font-weight: 500; }
+    .s07-card { position: absolute; top: 260px; border: 1.5px solid #e4e4e7; border-radius: 16px; background: #fff; box-shadow: 0 12px 32px rgba(9,9,11,.08); padding: 28px 32px; font-size: 28px; line-height: 1.42; }
+    .s07-card h6 { font-size: 30px; font-weight: 700; margin-bottom: 14px; color: #2563eb; }
+    .s07-card p { margin-bottom: 12px; }
+    #s07-c1 { left: 150px; width: 860px; }
+    #s07-c2 { left: 1080px; width: 690px; }
+    .s07-dim { color: #a1a1aa; }
+    #s07-win { border-radius: 4px; }
+    #s07-hana { border-radius: 4px; }
+    #s07-copy { color: #2563eb; font-weight: 700; background: #eff6ff; border-radius: 4px; }
+    #s07-winl { position: absolute; left: 150px; top: 880px; font-size: 32px; font-weight: 600; color: #b45309; }
+    #s07-eq { position: absolute; left: 1080px; top: 880px; font-family: "JetBrains Mono", monospace; font-size: 52px; font-weight: 700; }
+    #s07-eq b { color: #2563eb; }
+    #s07-arrow { position: absolute; left: 1020px; top: 560px; width: 50px; height: 6px; background: #2563eb; transform-origin: left center; }
+    #s07-arrow::after { content: ""; position: absolute; right: -6px; top: -12px; border-left: 22px solid #2563eb; border-top: 15px solid transparent; border-bottom: 15px solid transparent; }
+  </style>
+  <div id="root" data-composition-id="s07" data-width="1920" data-height="1080">
+    <div id="s07-t">The overlap</div>
+    <div id="s07-say">A fact near the edge may need the sentence before it</div>
+    <div class="s07-card" id="s07-c1"><h6>Chunk 1 · 504 characters</h6>
+      <p class="s07-dim"># Postmortem: Ledger Billing Delay (March 2026)</p>
+      <p class="s07-dim">On March 1, 2026 the monthly Ledger billing job was delayed by six hours. …</p>
+      <p class="s07-dim">Root cause: an expired TLS certificate on the Atlas API gateway caused authentication failures. …</p>
+      <p style="margin-bottom:0">Ma<span id="s07-win"><span id="s07-skip">rco Silva was the on-call engineer and led the incident response. </span><span id="s07-hana">Hana Sato renewed the certificate.</span></span></p>
+    </div>
+    <div class="s07-card" id="s07-c2"><h6>Chunk 2 · 240 characters</h6>
+      <p><span id="s07-copy">Hana Sato renewed the certificate.</span></p>
+      <p style="margin-bottom:0">Follow-up actions: the Platform team moved all certificates to automatic rotation with Vault, added an alert that fires 14 days before any certificate expires, and added a runbook for billing job retries.</p>
+    </div>
+    <div id="s07-arrow"></div>
+    <div id="s07-winl">The last 100 characters start mid-word: “rco Silva…”</div>
+    <div id="s07-eq">34 + 2 + 204 = <b>240</b></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s07-t", 0.05, 0.25);
+      inB("#s07-say", 2.437);
+      tl.fromTo("#s07-c1", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 3.037);
+      // Look back 100 characters.
+      tl.fromTo("#s07-win", { backgroundColor: "rgba(254,243,199,0)" }, { backgroundColor: "rgba(254,243,199,1)", duration: 0.5 }, 9.656);
+      inB("#s07-winl", 10.356);
+      // Move forward to the next full sentence.
+      tl.to("#s07-skip", { color: "#a1a1aa", duration: 0.4 }, 15.273);
+      tl.to("#s07-win", { backgroundColor: "rgba(254,243,199,0)", duration: 0.4 }, 15.273);
+      tl.fromTo("#s07-hana", { color: "#09090b", backgroundColor: "rgba(239,246,255,0)" }, { color: "#2563eb", backgroundColor: "rgba(239,246,255,1)", duration: 0.4 }, 18.272);
+      tl.to("#s07-winl", { opacity: 0, duration: 0.25 }, 18.272);
+      // Copy into chunk 2.
+      tl.fromTo("#s07-arrow", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.4, ease: "power3.inOut" }, 22.242);
+      tl.fromTo("#s07-c2", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 22.442);
+      tl.fromTo("#s07-copy", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 22.842);
+      inB("#s07-eq", 25.442);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 31.92);
+      window.__timelines["s07"] = tl;
+    })();
+  </script>
+</template>

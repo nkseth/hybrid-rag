@@ -1,0 +1,76 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s06-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s06-t span { color: #71717a; }
+    #s06-box { position: absolute; left: 146px; top: 316px; width: 1208px; height: 98px; border: 3px solid #09090b; border-radius: 12px; }
+    #s06-boxl { position: absolute; left: 150px; top: 262px; font-size: 32px; font-weight: 700; }
+    #s06-lim { position: absolute; left: 1350px; top: 290px; height: 150px; border-left: 5px dashed #dc2626; }
+    #s06-liml { position: absolute; left: 1370px; top: 290px; font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 700; color: #dc2626; }
+    #s06-zero { position: absolute; left: 150px; top: 430px; font-family: "JetBrains Mono", monospace; font-size: 28px; color: #71717a; }
+    .s06-b { position: absolute; top: 560px; height: 90px; border-radius: 8px; background: #09090b; color: #fff; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    #s06-b5.bad { background: #dc2626; }
+    #s06-stage { position: absolute; left: 150px; top: 680px; font-size: 30px; color: #71717a; font-weight: 500; }
+    .s06-eq { position: absolute; left: 150px; top: 800px; font-family: "JetBrains Mono", monospace; font-size: 64px; font-weight: 700; letter-spacing: -0.02em; }
+    .s06-eq b { color: #2563eb; }
+    #s06-e5 b { color: #dc2626; }
+    #s06-close { position: absolute; left: 150px; top: 940px; font-size: 40px; font-weight: 700; color: #2563eb; }
+  </style>
+  <div id="root" data-composition-id="s06" data-width="1920" data-height="1080">
+    <div id="s06-t">Pack paragraphs, <span>keep a running total</span></div>
+    <div id="s06-boxl">Chunk 1</div>
+    <div id="s06-box"></div>
+    <div id="s06-zero">0</div>
+    <div id="s06-lim"></div>
+    <div id="s06-liml">600</div>
+    <div class="s06-b" id="s06-b1" style="left:150px;width:94px">47</div>
+    <div class="s06-b" id="s06-b2" style="left:274px;width:282px">141</div>
+    <div class="s06-b" id="s06-b3" style="left:586px;width:416px">208</div>
+    <div class="s06-b" id="s06-b4" style="left:1032px;width:204px">102</div>
+    <div class="s06-b" id="s06-b5" style="left:1266px;width:408px">204</div>
+    <div id="s06-stage">the five paragraphs, drawn to scale: 2 pixels per character</div>
+    <div class="s06-eq" id="s06-e1"><b>47</b></div>
+    <div class="s06-eq" id="s06-e2">47 + 2 + 141 = <b>190</b></div>
+    <div class="s06-eq" id="s06-e3">190 + 2 + 208 = <b>400</b></div>
+    <div class="s06-eq" id="s06-e4">400 + 2 + 102 = <b>504</b></div>
+    <div class="s06-eq" id="s06-e5">504 + 2 + 204 = <b>710 &gt; 600</b></div>
+    <div id="s06-close" data-hold>Chunk 1 closed at 504 characters. Every sentence whole.</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      const out = (s, t) => tl.to(s, { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power3.in" }, t);
+      // Staging left → target left inside the box (2 px per character, 4 px for each blank line).
+      const into = { "#s06-b1": 0, "#s06-b2": 248 - 274, "#s06-b3": 534 - 586, "#s06-b4": 954 - 1032 };
+      inB("#s06-t", 0.05, 0.25);
+      tl.fromTo(["#s06-boxl", "#s06-box", "#s06-zero"], { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.5);
+      tl.fromTo(["#s06-lim", "#s06-liml"], { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.0);
+      tl.fromTo(".s06-b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: "expo.out" }, 1.4);
+      inB("#s06-stage", 2.0);
+      tl.to("#s06-stage", { opacity: 0, duration: 0.3 }, 6.297);
+      const step = (b, eq, prev, t) => {
+        tl.to(b, { x: into[b], y: -238, duration: 0.7, ease: "power3.inOut" }, t);
+        if (prev) out(prev, t + 0.4);
+        inB(eq, t + 0.6);
+      };
+      step("#s06-b1", "#s06-e1", null, 6.597);
+      step("#s06-b2", "#s06-e2", "#s06-e1", 9.311);
+      step("#s06-b3", "#s06-e3", "#s06-e2", 15.219);
+      step("#s06-b4", "#s06-e4", "#s06-e3", 17.781);
+      // The fifth paragraph does not fit.
+      tl.to("#s06-b5", { x: 1162 - 1266, y: -238, duration: 0.7, ease: "power3.inOut" }, 20.983);
+      tl.to("#s06-b5", { backgroundColor: "#dc2626", duration: 0.2 }, 21.783);
+      out("#s06-e4", 21.383);
+      inB("#s06-e5", 22.183);
+      tl.to("#s06-b5", { x: 0, y: 0, duration: 0.6, ease: "power3.inOut" }, 27.193);
+      tl.to("#s06-b5", { backgroundColor: "#a1a1aa", duration: 0.3 }, 27.693);
+      tl.to("#s06-box", { borderColor: "#2563eb", width: 1016, duration: 0.6, ease: "power3.inOut" }, 27.393);
+      tl.to(["#s06-b1", "#s06-b2", "#s06-b3", "#s06-b4"], { backgroundColor: "#2563eb", duration: 0.4 }, 27.593);
+      tl.to("#s06-boxl", { color: "#2563eb", duration: 0.3 }, 27.593);
+      inB("#s06-close", 28.793);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 35.46);
+      window.__timelines["s06"] = tl;
+    })();
+  </script>
+</template>

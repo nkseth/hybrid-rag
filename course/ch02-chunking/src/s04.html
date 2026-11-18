@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s04-t { position: absolute; left: 150px; top: 100px; font-size: 76px; font-weight: 700; letter-spacing: -0.03em; }
+    #s04-sub { position: absolute; left: 150px; top: 200px; font-size: 38px; color: #52525b; font-weight: 500; }
+    #s04-sub b { font-family: "JetBrains Mono", monospace; color: #dc2626; }
+    .s04-piece { position: absolute; width: 780px; border: 1.5px solid #e4e4e7; border-radius: 16px; background: #fff; box-shadow: 0 12px 32px rgba(9,9,11,.08); padding: 30px 36px; font-size: 30px; line-height: 1.45; }
+    #s04-p1 { left: 150px; top: 300px; }
+    #s04-p2 { left: 990px; top: 300px; }
+    .s04-piece h6 { font-family: "JetBrains Mono", monospace; font-size: 28px; color: #71717a; margin-bottom: 14px; font-weight: 500; }
+    .s04-dim { color: #a1a1aa; }
+    .s04-cut { color: #dc2626; font-weight: 800; background: #fef2f2; border-radius: 4px; padding: 0 4px; }
+    .s04-half { background: #fef3c7; }
+    #s04-q { position: absolute; left: 150px; top: 830px; font-size: 38px; font-weight: 700; }
+    .s04-bar { position: absolute; top: 900px; height: 28px; background: #e4e4e7; border-radius: 6px; width: 600px; }
+    .s04-bar i { display: block; height: 28px; width: 50%; background: #d97706; border-radius: 6px; transform-origin: left center; }
+    #s04-b1 { left: 150px; } #s04-b2 { left: 990px; }
+    .s04-bl { position: absolute; top: 944px; font-size: 30px; color: #52525b; font-weight: 600; }
+  </style>
+  <div id="root" data-composition-id="s04" data-width="1920" data-height="1080">
+    <div id="s04-t">Cutting by a fixed count</div>
+    <div id="s04-sub">Every <b>300</b> characters, no matter what</div>
+    <div class="s04-piece" data-layout-allow-overlap id="s04-p1"><h6>piece 1 · characters 1–300</h6><span class="s04-dim">… On March 1, 2026 the monthly Ledger billing job was delayed by six hours. … Root cause: an expired TLS certificate on the Atlas API gateway caused authentication failures. </span><span class="s04-half">Because <span class="s04-cut">Ledg</span></span></div>
+    <div class="s04-piece" data-layout-allow-overlap id="s04-p2"><h6>piece 2 · characters 301–600</h6><span class="s04-half"><span class="s04-cut">er</span> depends on Atlas for authentication, the billing job retried until it exhausted its retry budget.</span><span class="s04-dim"> Marco Silva was the on-call engineer …</span></div>
+    <div id="s04-q">Search: why did the billing job fail?</div>
+    <div class="s04-bar" id="s04-b1"><i></i></div><div class="s04-bar" id="s04-b2"><i></i></div>
+    <div class="s04-bl" style="left:150px">half the reason</div><div class="s04-bl" style="left:990px">the other half</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s04-t", 0.05, 0.25);
+      inB("#s04-sub", {c1});
+      // Two pieces start as one strip, then the cut pulls them apart.
+      tl.fromTo("#s04-p1", { opacity: 0, x: 30 }, { opacity: 1, x: 30, duration: 0.4 }, {c1+1.2});
+      tl.fromTo("#s04-p2", { opacity: 0, x: -30 }, { opacity: 1, x: -30, duration: 0.4 }, {c1+1.2});
+      tl.set(".s04-cut", { backgroundColor: "rgba(0,0,0,0)", color: "#09090b" }, 0);
+      tl.to(".s04-cut", { backgroundColor: "#fef2f2", color: "#dc2626", duration: 0.3 }, {c2+0.6});
+      tl.to("#s04-p1", { x: 0, rotation: -1.5, duration: 0.7, ease: "expo.out" }, {c2+1.6});
+      tl.to("#s04-p2", { x: 0, rotation: 1.5, duration: 0.7, ease: "expo.out" }, {c2+1.6});
+      tl.set(".s04-half", { backgroundColor: "rgba(0,0,0,0)" }, 0);
+      tl.to(".s04-half", { backgroundColor: "#fef3c7", duration: 0.4 }, {c3+0.4});
+      inB("#s04-q", {c4});
+      tl.fromTo(".s04-bar", { opacity: 0 }, { opacity: 1, duration: 0.3 }, {c4+1.2});
+      tl.fromTo(".s04-bar i", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "expo.out" }, {c4+1.4});
+      inB(".s04-bl", {c4+2.2});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s04"] = tl;
+    })();
+  </script>
+</template>

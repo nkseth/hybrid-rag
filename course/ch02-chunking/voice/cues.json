@@ -1,0 +1,382 @@
+{
+ "s01": {
+  "duration": 21.11,
+  "phrases": [
+   {
+    "text": "In chapter one, our question searched eleven chunks.",
+    "start": 0.6,
+    "end": 4.099
+   },
+   {
+    "text": "But what exactly is a chunk?",
+    "start": 4.549,
+    "end": 6.49
+   },
+   {
+    "text": "And who decides where one ends, and the next begins?",
+    "start": 6.94,
+    "end": 10.481
+   },
+   {
+    "text": "Here is the postmortem. Seven hundred and eleven characters long.",
+    "start": 10.931,
+    "end": 15.369
+   },
+   {
+    "text": "Where should we cut it? Cut in the wrong place, and the answer breaks.",
+    "start": 15.819,
+    "end": 19.659
+   }
+  ]
+ },
+ "s02": {
+  "duration": 27.75,
+  "phrases": [
+   {
+    "text": "Why cut at all?",
+    "start": 0.6,
+    "end": 2.029
+   },
+   {
+    "text": "Search scores one whole piece at a time.",
+    "start": 2.479,
+    "end": 4.954
+   },
+   {
+    "text": "If that piece is a forty page manual, the one sentence you need is drowned out by everything around it.",
+    "start": 5.404,
+    "end": 12.188
+   },
+   {
+    "text": "And everything we retrieve goes into the prompt, so huge pieces waste tokens.",
+    "start": 12.638,
+    "end": 17.907
+   },
+   {
+    "text": "But cut too small, and a sentence loses the context that gives it meaning.",
+    "start": 18.357,
+    "end": 23.243
+   },
+   {
+    "text": "Chunking is choosing the right size of piece.",
+    "start": 23.693,
+    "end": 26.295
+   }
+  ]
+ },
+ "s03": {
+  "duration": 22.15,
+  "phrases": [
+   {
+    "text": "First, how do we measure size?",
+    "start": 0.6,
+    "end": 2.541
+   },
+   {
+    "text": "This project counts characters. Letters, spaces, and punctuation.",
+    "start": 2.991,
+    "end": 7.663
+   },
+   {
+    "text": "Each chunk holds up to six hundred characters.",
+    "start": 8.113,
+    "end": 11.057
+   },
+   {
+    "text": "That is roughly one or two short paragraphs.",
+    "start": 11.507,
+    "end": 14.11
+   },
+   {
+    "text": "And each new chunk repeats up to one hundred characters from the end of the last one. We'll see why.",
+    "start": 14.56,
+    "end": 20.704
+   }
+  ]
+ },
+ "s04": {
+  "duration": 24.03,
+  "phrases": [
+   {
+    "text": "The simplest way to cut is by a fixed count.",
+    "start": 0.6,
+    "end": 3.672
+   },
+   {
+    "text": "Say, every three hundred characters, no matter what.",
+    "start": 4.122,
+    "end": 7.407
+   },
+   {
+    "text": "Character three hundred lands right in the middle of the word, Ledger.",
+    "start": 7.857,
+    "end": 12.017
+   },
+   {
+    "text": "Worse, the sentence that explains why is split across two pieces.",
+    "start": 12.467,
+    "end": 16.777
+   },
+   {
+    "text": "Search for why the billing job failed, and each piece holds only half of the reason.",
+    "start": 17.227,
+    "end": 22.581
+   }
+  ]
+ },
+ "s05": {
+  "duration": 21.94,
+  "phrases": [
+   {
+    "text": "So this project cuts smarter. It respects the writer's structure.",
+    "start": 0.6,
+    "end": 4.76
+   },
+   {
+    "text": "First, it splits the document at blank lines, into paragraphs.",
+    "start": 5.21,
+    "end": 9.541
+   },
+   {
+    "text": "The postmortem has five paragraphs.",
+    "start": 9.991,
+    "end": 12.316
+   },
+   {
+    "text": "Their lengths are forty seven, one hundred forty one, two hundred eight, one hundred two, and two hundred four characters.",
+    "start": 12.766,
+    "end": 20.489
+   }
+  ]
+ },
+ "s06": {
+  "duration": 35.81,
+  "phrases": [
+   {
+    "text": "Now it packs paragraphs into a chunk, like filling a box, keeping a running total.",
+    "start": 0.6,
+    "end": 6.147
+   },
+   {
+    "text": "Start with forty seven.",
+    "start": 6.597,
+    "end": 8.261
+   },
+   {
+    "text": "Add the next paragraph, plus two characters for the blank line between them. One hundred ninety.",
+    "start": 8.711,
+    "end": 14.769
+   },
+   {
+    "text": "Add the next. Four hundred.",
+    "start": 15.219,
+    "end": 17.331
+   },
+   {
+    "text": "Add the next. Five hundred and four.",
+    "start": 17.781,
+    "end": 20.533
+   },
+   {
+    "text": "The last paragraph would bring the total to seven hundred and ten. That is over six hundred.",
+    "start": 20.983,
+    "end": 26.743
+   },
+   {
+    "text": "So the box is closed. Chunk one is five hundred and four characters, and every sentence in it is whole.",
+    "start": 27.193,
+    "end": 34.361
+   }
+  ]
+ },
+ "s07": {
+  "duration": 32.27,
+  "phrases": [
+   {
+    "text": "Now, the overlap.",
+    "start": 0.6,
+    "end": 1.987
+   },
+   {
+    "text": "A fact near the edge of one chunk might depend on the sentence just before it.",
+    "start": 2.437,
+    "end": 7.706
+   },
+   {
+    "text": "So before starting chunk two, we look back at the last one hundred characters of chunk one.",
+    "start": 8.156,
+    "end": 14.023
+   },
+   {
+    "text": "Then we move forward to the start of the next full sentence.",
+    "start": 14.473,
+    "end": 17.822
+   },
+   {
+    "text": "That gives us: Hana Sato renewed the certificate.",
+    "start": 18.272,
+    "end": 21.792
+   },
+   {
+    "text": "That sentence is copied to the start of chunk two. Thirty four, plus two, plus two hundred four. Two hundred forty in total.",
+    "start": 22.242,
+    "end": 30.818
+   }
+  ]
+ },
+ "s08": {
+  "duration": 21.68,
+  "phrases": [
+   {
+    "text": "Two more rules keep things clean.",
+    "start": 0.6,
+    "end": 2.584
+   },
+   {
+    "text": "If one paragraph is longer than six hundred characters, it is split at the spaces between words. Never inside a word.",
+    "start": 3.034,
+    "end": 11.375
+   },
+   {
+    "text": "And if the last chunk is tiny, barely more than the repeated overlap, it is dropped. So we never store a near duplicate.",
+    "start": 11.825,
+    "end": 20.231
+   }
+  ]
+ },
+ "s09": {
+  "duration": 32.16,
+  "phrases": [
+   {
+    "text": "How much does the size matter? Let's run the real chunker on the postmortem, three ways.",
+    "start": 0.6,
+    "end": 6.531
+   },
+   {
+    "text": "At two hundred characters, we get four chunks. Sentences are split, and pieces start in the middle of a thought.",
+    "start": 6.981,
+    "end": 14.149
+   },
+   {
+    "text": "At six hundred, two chunks. Each one reads as a complete thought.",
+    "start": 14.599,
+    "end": 19.207
+   },
+   {
+    "text": "At two thousand, one chunk. The whole document. Precise search is gone.",
+    "start": 19.657,
+    "end": 24.67
+   },
+   {
+    "text": "There is no perfect number. It is a trade-off you measure with evals, in chapter ten.",
+    "start": 25.12,
+    "end": 30.709
+   }
+  ]
+ },
+ "s10": {
+  "duration": 31.46,
+  "phrases": [
+   {
+    "text": "What happens if you change the chunk size later?",
+    "start": 0.6,
+    "end": 3.544
+   },
+   {
+    "text": "Every document stores a fingerprint of its content, called a hash.",
+    "start": 3.994,
+    "end": 8.346
+   },
+   {
+    "text": "If the fingerprint hasn't changed, ingesting it again is skipped.",
+    "start": 8.796,
+    "end": 12.913
+   },
+   {
+    "text": "This project writes the chunker's settings into a version label, and mixes that label into the fingerprint.",
+    "start": 13.363,
+    "end": 19.998
+   },
+   {
+    "text": "So when a developer changes the size and updates the label, every fingerprint changes, and every document is re-chunked instead of skipped.",
+    "start": 20.448,
+    "end": 30.005
+   }
+  ]
+ },
+ "s11": {
+  "duration": 22.75,
+  "phrases": [
+   {
+    "text": "Where does chunking happen? Inside ingestion.",
+    "start": 0.6,
+    "end": 3.715
+   },
+   {
+    "text": "Parse the file into plain text. Then chunk it.",
+    "start": 4.165,
+    "end": 7.45
+   },
+   {
+    "text": "Each chunk is turned into a vector, added to the keyword index, and read for entities to build the graph.",
+    "start": 7.9,
+    "end": 14.833
+   },
+   {
+    "text": "Every search method in the coming chapters works on these chunks. That is why the cut matters.",
+    "start": 15.283,
+    "end": 21.299
+   }
+  ]
+ },
+ "s12": {
+  "duration": 20.49,
+  "phrases": [
+   {
+    "text": "Here it is, on this project's sources page.",
+    "start": 0.6,
+    "end": 3.352
+   },
+   {
+    "text": "The seven sample documents, each with its chunk count.",
+    "start": 3.802,
+    "end": 7.535
+   },
+   {
+    "text": "The postmortem: two chunks. Exactly what we worked out by hand.",
+    "start": 7.985,
+    "end": 12.508
+   },
+   {
+    "text": "And the pipeline, written right on the page. Parse, chunk, embed, index, extract graph.",
+    "start": 12.958,
+    "end": 19.038
+   }
+  ]
+ },
+ "s13": {
+  "duration": 17.65,
+  "phrases": [
+   {
+    "text": "To recap.",
+    "start": 0.6,
+    "end": 1.645
+   },
+   {
+    "text": "Chunks are the pieces we search.",
+    "start": 2.095,
+    "end": 4.037
+   },
+   {
+    "text": "Cut at paragraphs, pack up to six hundred characters, and overlap by one sentence.",
+    "start": 4.487,
+    "end": 9.927
+   },
+   {
+    "text": "Next chapter: the math we need. Sums, averages, and weights. No fear required.",
+    "start": 10.377,
+    "end": 16.201
+   }
+  ]
+ }
+}

@@ -1,0 +1,107 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    .w { display: inline-block; }
+    #s02-why { position: absolute; left: 0; right: 0; top: 450px; text-align: center; font-size: 110px; font-weight: 700; letter-spacing: -0.035em; }
+    #s02-diagram { position: absolute; inset: 0; }
+    .s02-chip { position: absolute; left: 150px; height: 64px; padding: 0 26px; display: flex; align-items: center; font-size: 30px; font-weight: 500; background: #f4f4f5; border: 1.5px solid #e4e4e7; border-radius: 12px; }
+    #s02-cut { position: absolute; left: 640px; top: 240px; height: 560px; border-left: 4px dashed #a1a1aa; }
+    #s02-cutlabel { position: absolute; left: 520px; top: 820px; width: 240px; text-align: center; font-size: 30px; color: #71717a; font-weight: 500; }
+    #s02-srclabel { position: absolute; left: 150px; top: 180px; font-size: 34px; font-weight: 600; }
+    #s02-llm { position: absolute; left: 790px; top: 330px; width: 340px; height: 340px; border: 3px solid #09090b; border-radius: 28px; background: #fff; padding: 40px; }
+    #s02-llm b { display: block; height: 6px; background: #d4d4d8; border-radius: 3px; margin-bottom: 22px; }
+    #s02-llmname { position: absolute; left: 0; right: 0; bottom: 34px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 44px; font-weight: 700; }
+    #s02-doc { position: absolute; left: 1430px; top: 300px; width: 320px; height: 400px; border: 1.5px solid #e4e4e7; border-radius: 14px; background: #fff; box-shadow: 0 12px 32px rgba(9,9,11,.08); padding: 30px 26px; }
+    #s02-doc h4 { font-size: 30px; line-height: 1.2; font-weight: 700; margin-bottom: 22px; }
+    #s02-doc b { display: block; height: 8px; background: #e4e4e7; border-radius: 3px; margin-bottom: 14px; }
+    #s02-lock { position: absolute; left: 1556px; top: 730px; width: 70px; height: 90px; }
+    #s02-lock i { position: absolute; left: 13px; top: 0; width: 44px; height: 50px; border: 7px solid #09090b; border-bottom: none; border-radius: 22px 22px 0 0; }
+    #s02-lock u { position: absolute; left: 0; top: 40px; width: 70px; height: 50px; background: #09090b; border-radius: 8px; }
+    #s02-wall { position: absolute; left: 1270px; top: 260px; height: 480px; border-left: 6px dashed #dc2626; }
+    #s02-never { position: absolute; left: 1150px; top: 770px; width: 240px; text-align: center; font-size: 32px; font-weight: 700; color: #dc2626; }
+    #s02-sent { position: absolute; left: 0; right: 0; top: 170px; text-align: center; font-size: 72px; font-weight: 700; letter-spacing: -0.03em; }
+    #s02-blank { display: inline-block; min-width: 300px; border-bottom: 6px solid #09090b; text-align: left; }
+    #s02-fill { color: #dc2626; }
+    #s02-bars { position: absolute; left: 460px; top: 380px; width: 1000px; }
+    .s02-row { display: flex; align-items: center; height: 92px; font-size: 40px; font-weight: 600; }
+    .s02-row span { width: 260px; }
+    .s02-row i { display: block; height: 44px; background: #d4d4d8; border-radius: 8px; transform-origin: left center; }
+    .s02-row em { font-style: normal; margin-left: 22px; font-family: "JetBrains Mono", monospace; font-size: 34px; color: #52525b; }
+    #s02-r0 i { background: #09090b; }
+    #s02-illu { position: absolute; left: 460px; top: 790px; font-size: 30px; color: #71717a; }
+    #s02-neq { position: absolute; left: 0; right: 0; top: 400px; text-align: center; font-size: 110px; font-weight: 700; letter-spacing: -0.035em; }
+    #s02-neq b { color: #dc2626; }
+    #s02-hall { position: absolute; left: 0; right: 0; top: 380px; text-align: center; font-size: 160px; font-weight: 700; letter-spacing: -0.04em; color: #dc2626; }
+    #s02-def { position: absolute; left: 0; right: 0; top: 600px; text-align: center; font-size: 44px; color: #52525b; font-weight: 500; }
+  </style>
+  <div id="root" data-composition-id="s02" data-width="1920" data-height="1080">
+    <div id="s02-why">Why did that happen?</div>
+    <div id="s02-diagram">
+      <div id="s02-srclabel">Public text</div>
+      <div class="s02-chip" style="top:250px">web pages</div>
+      <div class="s02-chip" style="top:340px">books</div>
+      <div class="s02-chip" style="top:430px">code</div>
+      <div class="s02-chip" style="top:520px">forums</div>
+      <div class="s02-chip" style="top:610px">news</div>
+      <div class="s02-chip" id="s02-late" style="top:700px">next year's news</div>
+      <div id="s02-cut"></div>
+      <div id="s02-cutlabel">training cutoff</div>
+      <div id="s02-llm"><b></b><b></b><b></b><b></b><b style="width:70%"></b><div id="s02-llmname">LLM</div></div>
+      <div id="s02-wall"></div>
+      <div id="s02-never">never seen</div>
+      <div id="s02-doc"><h4>Postmortem: Ledger Billing Delay</h4><b></b><b></b><b style="width:80%"></b><b></b><b style="width:60%"></b><b></b><b style="width:75%"></b></div>
+      <div id="s02-lock"><i></i><u></u></div>
+    </div>
+    <div id="s02-sent">The delay was caused by a <span id="s02-blank"><span id="s02-fill">payment</span></span> …</div>
+    <div id="s02-bars">
+      <div class="s02-row" id="s02-r0"><span>payment</span><i style="width:496px"></i><em>0.31</em></div>
+      <div class="s02-row" id="s02-r1"><span>network</span><i style="width:384px"></i><em>0.24</em></div>
+      <div class="s02-row" id="s02-r2"><span>server</span><i style="width:288px"></i><em>0.18</em></div>
+      <div class="s02-row" id="s02-r3"><span>certificate</span><i style="width:64px"></i><em>0.04</em></div>
+    </div>
+    <div id="s02-illu">Illustrative probabilities for the next word</div>
+    <div id="s02-neq" data-hold>Sounds right <b>≠</b> is right</div>
+    <div id="s02-hall">Hallucination</div>
+    <div id="s02-def">A fluent answer with no facts behind it</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const hide = (sel, t) => tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in" }, t);
+      const showBlur = (sel, t, d = 0.3) => tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      showBlur("#s02-why", 0.05, 0.25);
+      hide("#s02-why", {c1-0.3});
+      // Public text flows into the model; the late chip stops at the cutoff.
+      showBlur("#s02-srclabel", {c1});
+      tl.fromTo(".s02-chip", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.12, ease: "expo.out" }, {c1});
+      tl.fromTo("#s02-llm", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.7, ease: "expo.out" }, {c1+0.3});
+      tl.fromTo("#s02-cut", { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.6, ease: "power3.inOut" }, {c1+2.2});
+      showBlur("#s02-cutlabel", {c1+2.5});
+      tl.to(".s02-chip:not(#s02-late)", { x: 700, opacity: 0, scale: 0.6, duration: 0.8, stagger: 0.1, ease: "power3.in" }, {c1+3});
+      tl.to("#s02-late", { x: 300, duration: 0.8, ease: "expo.out" }, {c1+3});
+      tl.to("#s02-late", { opacity: 0.35, duration: 0.3 }, {c1+3.8});
+      // The private document, locked away.
+      tl.fromTo("#s02-doc", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.7, ease: "expo.out" }, {c2});
+      tl.fromTo("#s02-lock", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }, {c2+0.9});
+      tl.fromTo("#s02-wall", { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.5, ease: "power3.inOut" }, {c2+1.6});
+      showBlur("#s02-never", {c2+1.9});
+      hide("#s02-diagram", {c3+0.6});
+      // Next-word prediction.
+      tl.fromTo("#s02-sent", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.35, ease: "power4.out" }, {c3+1});
+      tl.set("#s02-fill", { opacity: 0 }, 0);
+      tl.fromTo(".s02-row", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.15 }, {c4+0.4});
+      tl.fromTo(".s02-row i", { scaleX: 0 }, { scaleX: 1, duration: 0.7, stagger: 0.15, ease: "expo.out" }, {c4+0.4});
+      showBlur("#s02-illu", {c4+1.2});
+      tl.fromTo(".s02-row em", { color: "#52525b" }, { color: "#09090b", duration: 0.2, stagger: 0.35 }, {c5+0.3});
+      tl.fromTo("#s02-r0", { scale: 1 }, { scale: 1.06, duration: 0.4, ease: "back.out(1.4)" }, {c5+1.8});
+      tl.to("#s02-fill", { opacity: 1, duration: 0.3 }, {c5+2.2});
+      hide(["#s02-bars", "#s02-illu", "#s02-sent"], {c6-0.3});
+      showBlur("#s02-neq", {c6+0.1});
+      hide("#s02-neq", {c7+0.9});
+      tl.fromTo("#s02-hall", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, {c7+1.1});
+      showBlur("#s02-def", {c7+1.3});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s02"] = tl;
+    })();
+  </script>
+</template>

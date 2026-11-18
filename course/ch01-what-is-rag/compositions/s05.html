@@ -1,0 +1,74 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s05-title { position: absolute; left: 0; right: 0; top: 110px; text-align: center; font-size: 76px; font-weight: 700; letter-spacing: -0.03em; }
+    #s05-title span { color: #71717a; }
+    .s05-doc { position: absolute; top: 290px; width: 220px; height: 300px; background: #fff; border: 1.5px solid #e4e4e7; border-radius: 12px; box-shadow: 0 12px 32px rgba(9,9,11,.08); padding: 20px 18px; }
+    .s05-doc h4 { font-size: 28px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; min-height: 132px; }
+    .s05-doc b { display: block; height: 8px; background: #e4e4e7; border-radius: 3px; margin-top: 14px; }
+    .s05-chunk { position: absolute; width: 220px; height: 92px; background: #f4f4f5; border: 1.5px solid #d4d4d8; border-radius: 10px; padding: 14px 16px; }
+    .s05-chunk b { display: block; height: 7px; background: #a1a1aa; border-radius: 3px; margin-bottom: 12px; }
+    .s05-chunk em { position: absolute; right: 12px; bottom: 8px; font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 28px; color: #71717a; }
+    #s05-count { position: absolute; left: 0; right: 0; top: 820px; text-align: center; font-size: 64px; font-weight: 700; letter-spacing: -0.02em; }
+    #s05-count i { font-style: normal; color: #a1a1aa; margin: 0 24px; }
+    #s05-zoom { position: absolute; left: 360px; top: 300px; width: 1200px; background: #fff; border: 2.5px solid #2563eb; border-radius: 16px; box-shadow: 0 24px 60px rgba(9,9,11,.14); padding: 40px 48px; }
+    #s05-zoom h5 { font-size: 30px; color: #2563eb; font-weight: 600; margin-bottom: 18px; }
+    #s05-zoom p { font-size: 40px; line-height: 1.4; font-weight: 500; }
+    #s05-zoom small { display: block; margin-top: 24px; font-size: 30px; color: #71717a; }
+    #s05-db { position: absolute; left: 760px; top: 560px; width: 400px; height: 300px; }
+    #s05-db i { position: absolute; left: 0; width: 400px; height: 90px; border: 4px solid #09090b; border-radius: 50%; background: #fff; }
+    #s05-db u { position: absolute; left: 0; top: 45px; width: 400px; height: 210px; border: 4px solid #09090b; border-top: none; border-radius: 0 0 200px 200px / 0 0 45px 45px; background: #fff; }
+    #s05-dblabel { position: absolute; left: 0; right: 0; top: 900px; text-align: center; font-size: 40px; font-weight: 600; }
+  </style>
+  <div id="root" data-composition-id="s05" data-width="1920" data-height="1080">
+    <div id="s05-title" data-hold>Prepare <span>ahead of time</span></div>
+    <div class="s05-doc" style="left:116px"><h4>Company Overview</h4><b></b><b></b><b style="width:70%"></b></div>
+    <div class="s05-doc" style="left:356px"><h4>Platform Team Charter</h4><b></b><b></b><b style="width:70%"></b></div>
+    <div class="s05-doc" style="left:596px"><h4>Ledger Billing Service</h4><b></b><b></b><b style="width:70%"></b></div>
+    <div class="s05-doc" style="left:836px"><h4>Postmortem: Ledger Billing Delay</h4><b></b><b></b><b style="width:70%"></b></div>
+    <div class="s05-doc" style="left:1076px"><h4>Security Policy</h4><b></b><b></b><b style="width:70%"></b></div>
+    <div class="s05-doc" style="left:1316px"><h4>Routing and Data Teams</h4><b></b><b></b><b style="width:70%"></b></div>
+    <div class="s05-doc" style="left:1556px"><h4>Engineering Onboarding Guide</h4><b></b><b></b><b style="width:70%"></b></div>
+    <!-- chunks: 2,2,2,2,1,1,1 = 11 -->
+    <div class="s05-chunk" data-layout-allow-overlap style="left:116px;top:300px"><b></b><b style="width:70%"></b><em>1</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:116px;top:410px"><b></b><b style="width:60%"></b><em>2</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:356px;top:300px"><b></b><b style="width:70%"></b><em>3</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:356px;top:410px"><b></b><b style="width:60%"></b><em>4</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:596px;top:300px"><b></b><b style="width:70%"></b><em>5</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:596px;top:410px"><b></b><b style="width:60%"></b><em>6</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap id="s05-pm" style="left:836px;top:300px"><b></b><b style="width:70%"></b><em>7</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:836px;top:410px"><b></b><b style="width:60%"></b><em>8</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:1076px;top:300px"><b></b><b style="width:70%"></b><em>9</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:1316px;top:300px"><b></b><b style="width:70%"></b><em>10</em></div>
+    <div class="s05-chunk" data-layout-allow-overlap style="left:1556px;top:300px"><b></b><b style="width:70%"></b><em>11</em></div>
+    <div id="s05-count">7 documents<i>→</i>11 chunks</div>
+    <div id="s05-zoom" data-hold><h5>Chunk 7 · Postmortem</h5><p>Root cause: an expired TLS certificate on the Atlas API gateway caused authentication failures.</p><small>One precise paragraph, not the whole file</small></div>
+    <div id="s05-db"><u></u><i></i></div>
+    <div id="s05-dblabel">One database, searchable</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s05-title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power4.out" }, 0.05);
+      tl.fromTo(".s05-doc", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: "expo.out" }, 5.338);
+      tl.set(".s05-doc h4", { opacity: 0 }, 0);
+      tl.fromTo(".s05-doc h4", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, stagger: 0.55, ease: "power4.out" }, 9.692);
+      // Cut: each page splits into its chunks.
+      tl.to(".s05-doc", { opacity: 0, scaleY: 0.4, y: -60, duration: 0.45, stagger: 0.06, ease: "power3.in" }, 16.481);
+      tl.fromTo(".s05-chunk", { opacity: 0, y: -60, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.07, ease: "expo.out" }, 16.881);
+      tl.fromTo("#s05-count", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power4.out" }, 20.064);
+      // Why cut: one chunk is the exact answer.
+      tl.to(".s05-chunk:not(#s05-pm)", { opacity: 0.25, duration: 0.3 }, 23.053);
+      tl.to("#s05-pm", { borderColor: "#2563eb", background: "#eff6ff", duration: 0.3 }, 23.053);
+      tl.to("#s05-count", { opacity: 0, duration: 0.25 }, 24.053);
+      tl.fromTo("#s05-zoom", { opacity: 0, scale: 0.5, y: -60 }, { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out" }, 24.153);
+      // Store: everything drops into one database.
+      tl.to("#s05-zoom", { opacity: 0, scale: 0.9, duration: 0.3, ease: "power3.in" }, 28.841);
+      tl.fromTo("#s05-db", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 29.241);
+      tl.to(".s05-chunk", { opacity: 0, x: (i, el) => 960 - (parseFloat(el.style.left) + 110), y: (i, el) => 620 - parseFloat(el.style.top), scale: 0.3, duration: 0.7, stagger: 0.05, ease: "power3.in" }, 29.641);
+      tl.fromTo("#s05-dblabel", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power4.out" }, 30.641);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 34.5);
+      window.__timelines["s05"] = tl;
+    })();
+  </script>
+</template>

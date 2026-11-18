@@ -1,0 +1,457 @@
+{
+ "s01": {
+  "duration": 20.6,
+  "phrases": [
+   {
+    "text": "Here is a question about one company, Kestrel Dynamics, and its internal documents.",
+    "start": 0.6,
+    "end": 6.381
+   },
+   {
+    "text": "What caused the billing delay in March 2026?",
+    "start": 6.831,
+    "end": 10.693
+   },
+   {
+    "text": "Let's ask a general AI model.",
+    "start": 11.143,
+    "end": 13.511
+   },
+   {
+    "text": "It answers instantly. Confidently.",
+    "start": 13.961,
+    "end": 16.777
+   },
+   {
+    "text": "And it is completely made up.",
+    "start": 17.227,
+    "end": 19.147
+   }
+  ]
+ },
+ "s02": {
+  "duration": 29.58,
+  "phrases": [
+   {
+    "text": "Why did that happen?",
+    "start": 0.6,
+    "end": 2.093
+   },
+   {
+    "text": "An AI model learns from public text, up to a cutoff date.",
+    "start": 2.543,
+    "end": 6.959
+   },
+   {
+    "text": "It has never seen your company's private documents.",
+    "start": 7.409,
+    "end": 10.673
+   },
+   {
+    "text": "So it does what it was trained to do.",
+    "start": 11.123,
+    "end": 13.171
+   },
+   {
+    "text": "It predicts the next word that sounds most likely.",
+    "start": 13.621,
+    "end": 16.736
+   },
+   {
+    "text": "Each candidate word gets a probability, and a likely one wins.",
+    "start": 17.186,
+    "end": 21.602
+   },
+   {
+    "text": "But sounding right is not the same as being right.",
+    "start": 22.052,
+    "end": 25.295
+   },
+   {
+    "text": "This has a name. Hallucination.",
+    "start": 25.745,
+    "end": 28.134
+   }
+  ]
+ },
+ "s03": {
+  "duration": 22.2,
+  "phrases": [
+   {
+    "text": "The fix is surprisingly simple. Think of an exam.",
+    "start": 0.6,
+    "end": 4.035
+   },
+   {
+    "text": "A closed-book exam tests what you remember.",
+    "start": 4.485,
+    "end": 7.279
+   },
+   {
+    "text": "An open-book exam lets you look things up.",
+    "start": 7.729,
+    "end": 10.631
+   },
+   {
+    "text": "RAG turns every question into an open-book exam.",
+    "start": 11.081,
+    "end": 15.219
+   },
+   {
+    "text": "Before the AI answers, we find the right pages, and put them in front of it.",
+    "start": 15.669,
+    "end": 20.747
+   }
+  ]
+ },
+ "s04": {
+  "duration": 20.85,
+  "phrases": [
+   {
+    "text": "R. A. G. stands for three steps.",
+    "start": 0.6,
+    "end": 3.16
+   },
+   {
+    "text": "Retrieval. Search your documents for the passages that matter.",
+    "start": 3.61,
+    "end": 7.514
+   },
+   {
+    "text": "Augmented. Add those passages to the prompt.",
+    "start": 7.964,
+    "end": 11.057
+   },
+   {
+    "text": "Generation. The AI writes the answer, using only what we gave it.",
+    "start": 11.507,
+    "end": 16.414
+   },
+   {
+    "text": "Let's follow our question through each step.",
+    "start": 16.864,
+    "end": 19.403
+   }
+  ]
+ },
+ "s05": {
+  "duration": 34.85,
+  "phrases": [
+   {
+    "text": "But retrieval needs something to search, so we prepare ahead of time.",
+    "start": 0.6,
+    "end": 4.888
+   },
+   {
+    "text": "This project holds seven documents from Kestrel Dynamics.",
+    "start": 5.338,
+    "end": 9.242
+   },
+   {
+    "text": "A company overview, team charters, a security policy, and the March postmortem.",
+    "start": 9.692,
+    "end": 15.431
+   },
+   {
+    "text": "Each document is cut into smaller pieces, called chunks.",
+    "start": 15.881,
+    "end": 19.614
+   },
+   {
+    "text": "Seven documents become eleven chunks.",
+    "start": 20.064,
+    "end": 22.603
+   },
+   {
+    "text": "Why cut them? We want the exact paragraph that answers the question, not a whole file.",
+    "start": 23.053,
+    "end": 28.791
+   },
+   {
+    "text": "Every chunk is made searchable, and stored in one database.",
+    "start": 29.241,
+    "end": 33.401
+   }
+  ]
+ },
+ "s06": {
+  "duration": 30.67,
+  "phrases": [
+   {
+    "text": "Now our question arrives.",
+    "start": 0.6,
+    "end": 2.477
+   },
+   {
+    "text": "The system compares it against all eleven chunks.",
+    "start": 2.927,
+    "end": 6.021
+   },
+   {
+    "text": "Each chunk gets a score. How well does it match?",
+    "start": 6.471,
+    "end": 9.799
+   },
+   {
+    "text": "Sort by score, and keep the top six.",
+    "start": 10.249,
+    "end": 12.617
+   },
+   {
+    "text": "At the very top: the postmortem paragraph.",
+    "start": 13.067,
+    "end": 16.224
+   },
+   {
+    "text": "This project scores with three methods at once.",
+    "start": 16.674,
+    "end": 19.597
+   },
+   {
+    "text": "One matches words. One matches meaning. One follows connections.",
+    "start": 20.047,
+    "end": 24.655
+   },
+   {
+    "text": "Then it combines their votes. Each method gets its own chapter.",
+    "start": 25.105,
+    "end": 29.222
+   }
+  ]
+ },
+ "s07": {
+  "duration": 22.43,
+  "phrases": [
+   {
+    "text": "Step two. Augment.",
+    "start": 0.6,
+    "end": 2.221
+   },
+   {
+    "text": "We build a prompt. This is the actual text this project sends.",
+    "start": 2.671,
+    "end": 6.938
+   },
+   {
+    "text": "First, the rules.",
+    "start": 7.388,
+    "end": 8.668
+   },
+   {
+    "text": "Answer only from the passages. Cite them. And if the answer isn't there, say I don't know.",
+    "start": 9.118,
+    "end": 15.049
+   },
+   {
+    "text": "Then the six passages, each with a number.",
+    "start": 15.499,
+    "end": 18.336
+   },
+   {
+    "text": "And the question, at the very end.",
+    "start": 18.786,
+    "end": 20.983
+   }
+  ]
+ },
+ "s08": {
+  "duration": 28.58,
+  "phrases": [
+   {
+    "text": "Step three. Generation.",
+    "start": 0.6,
+    "end": 2.371
+   },
+   {
+    "text": "The model reads about eight hundred tokens of context, and writes.",
+    "start": 2.821,
+    "end": 7.301
+   },
+   {
+    "text": "An expired TLS certificate on the Atlas API gateway caused authentication failures.",
+    "start": 7.751,
+    "end": 14.62
+   },
+   {
+    "text": "So the billing job retried until it ran out of retries.",
+    "start": 15.07,
+    "end": 18.889
+   },
+   {
+    "text": "See the small one at the end? That is a citation.",
+    "start": 19.339,
+    "end": 22.688
+   },
+   {
+    "text": "It points to passage one, so you can check the answer yourself.",
+    "start": 23.138,
+    "end": 27.127
+   }
+  ]
+ },
+ "s09": {
+  "duration": 15.39,
+  "phrases": [
+   {
+    "text": "Put the two answers side by side.",
+    "start": 0.6,
+    "end": 3.096
+   },
+   {
+    "text": "Without retrieval: a confident guess.",
+    "start": 3.546,
+    "end": 6.298
+   },
+   {
+    "text": "With retrieval: the real cause, with proof.",
+    "start": 6.748,
+    "end": 9.649
+   },
+   {
+    "text": "Same model. The only difference is what we put in front of it.",
+    "start": 10.099,
+    "end": 13.939
+   }
+  ]
+ },
+ "s10": {
+  "duration": 43.28,
+  "phrases": [
+   {
+    "text": "A fair question. Why not skip the search, and paste every document into the prompt?",
+    "start": 0.6,
+    "end": 5.976
+   },
+   {
+    "text": "Three reasons.",
+    "start": 6.426,
+    "end": 7.706
+   },
+   {
+    "text": "Size. A model can only read so much at once, and a real company has thousands of documents, not seven.",
+    "start": 8.156,
+    "end": 15.729
+   },
+   {
+    "text": "Cost. You pay for every token the model reads, on every question.",
+    "start": 16.179,
+    "end": 20.531
+   },
+   {
+    "text": "Focus. Bury the right paragraph in a thousand pages, and the model is more likely to miss it.",
+    "start": 20.981,
+    "end": 27.147
+   },
+   {
+    "text": "And why not train the model on the documents instead?",
+    "start": 27.597,
+    "end": 31.117
+   },
+   {
+    "text": "Training is slow and expensive, and must be repeated whenever a document changes.",
+    "start": 31.567,
+    "end": 37.22
+   },
+   {
+    "text": "With RAG, a new document is searchable minutes after it arrives.",
+    "start": 37.67,
+    "end": 41.83
+   }
+  ]
+ },
+ "s11": {
+  "duration": 21.54,
+  "phrases": [
+   {
+    "text": "So every RAG system has two phases.",
+    "start": 0.6,
+    "end": 3.672
+   },
+   {
+    "text": "Phase one, ingestion, happens ahead of time.",
+    "start": 4.122,
+    "end": 7.322
+   },
+   {
+    "text": "Documents in. Chunks out. Stored and searchable.",
+    "start": 7.772,
+    "end": 11.228
+   },
+   {
+    "text": "Phase two, the query, happens every time someone asks.",
+    "start": 11.678,
+    "end": 15.603
+   },
+   {
+    "text": "Search. Build the prompt. Generate the answer, with citations.",
+    "start": 16.053,
+    "end": 20.085
+   }
+  ]
+ },
+ "s12": {
+  "duration": 21.28,
+  "phrases": [
+   {
+    "text": "And here it is, running in this project.",
+    "start": 0.6,
+    "end": 3.139
+   },
+   {
+    "text": "The same question, typed into the playground.",
+    "start": 3.589,
+    "end": 6.447
+   },
+   {
+    "text": "The answer, with its citation.",
+    "start": 6.897,
+    "end": 8.903
+   },
+   {
+    "text": "On the right, the passages it retrieved.",
+    "start": 9.353,
+    "end": 12.019
+   },
+   {
+    "text": "Each one shows its rank from every search method.",
+    "start": 12.469,
+    "end": 15.648
+   },
+   {
+    "text": "And the answer is marked grounded: one hundred percent.",
+    "start": 16.098,
+    "end": 19.831
+   }
+  ]
+ },
+ "s13": {
+  "duration": 20.43,
+  "phrases": [
+   {
+    "text": "One idea to keep.",
+    "start": 0.6,
+    "end": 2.136
+   },
+   {
+    "text": "The model does not learn your documents.",
+    "start": 2.586,
+    "end": 5.231
+   },
+   {
+    "text": "Every time, we find the right pages, and hand them over.",
+    "start": 5.681,
+    "end": 9.479
+   },
+   {
+    "text": "That is RAG. An open-book exam for AI.",
+    "start": 9.929,
+    "end": 13.683
+   },
+   {
+    "text": "Next chapter: how documents are cut into chunks, and why the cut matters.",
+    "start": 14.133,
+    "end": 18.976
+   }
+  ]
+ }
+}

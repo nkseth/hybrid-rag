@@ -1,0 +1,44 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s09-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s09-t span { color: #71717a; }
+    .s09-r { position: absolute; left: 150px; width: 1620px; display: flex; align-items: center; font-family: "JetBrains Mono", monospace; font-size: 52px; font-weight: 700; opacity: 0; }
+    .s09-r .m { width: 330px; font-family: Inter, sans-serif; font-size: 42px; }
+    .s09-r .rk { width: 300px; font-size: 38px; color: #52525b; }
+    .s09-r .f { width: 520px; }
+    .s09-r .v { color: #2563eb; }
+    #s09-r1 .m { color: #2563eb; } #s09-r2 .m { color: #d97706; } #s09-r3 .m { color: #0d9488; }
+    #s09-sum { position: absolute; left: 1300px; top: 620px; font-family: "JetBrains Mono", monospace; font-size: 72px; font-weight: 700; color: #2563eb; opacity: 0; }
+    #s09-board { position: absolute; left: 150px; top: 780px; width: 1000px; opacity: 0; }
+    .s09-b { display: flex; justify-content: space-between; font-size: 40px; font-weight: 700; padding: 14px 24px; border-radius: 12px; margin-bottom: 12px; border: 2px solid #e4e4e7; }
+    .s09-b em { font-style: normal; font-family: "JetBrains Mono", monospace; }
+    #s09-b2 { border-color: #2563eb; color: #2563eb; }
+  </style>
+  <div id="root" data-composition-id="s09" data-width="1920" data-height="1080">
+    <div id="s09-t">Ledger Billing Service chunk, <span>by hand</span></div>
+    <div class="s09-r" id="s09-r1" style="top:240px"><span class="m">vector</span><span class="rk">rank 2</span><span class="f">1 ÷ (10 + 2)</span><span class="v">= 0.0833</span></div>
+    <div class="s09-r" id="s09-r2" style="top:360px"><span class="m">keyword</span><span class="rk">rank 3</span><span class="f">1 ÷ (10 + 3)</span><span class="v">= 0.0769</span></div>
+    <div class="s09-r" id="s09-r3" style="top:480px"><span class="m">graph</span><span class="rk">rank 1</span><span class="f">0.5 ÷ (10 + 1)</span><span class="v">= 0.0455</span></div>
+    <div id="s09-sum">Σ = 0.2057</div>
+    <div id="s09-board" data-hold>
+      <div class="s09-b"><span>1 · Postmortem</span><em>0.2152</em></div>
+      <div class="s09-b" id="s09-b2"><span>2 · Ledger Billing Service</span><em>0.2057</em></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s09-t", 0.05, 0.25);
+      [["#s09-r1", {c1}], ["#s09-r2", {c2}], ["#s09-r3", {c3}]].forEach(([r, t]) => {
+        tl.fromTo(r, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, t);
+        tl.fromTo(`${r} .v`, { opacity: 0 }, { opacity: 1, duration: 0.3 }, t + 2.2);
+      });
+      tl.fromTo("#s09-sum", { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, {c4});
+      tl.fromTo("#s09-board", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, {c4+3});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s09"] = tl;
+    })();
+  </script>
+</template>

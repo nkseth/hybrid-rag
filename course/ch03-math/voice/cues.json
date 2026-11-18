@@ -1,0 +1,412 @@
+{
+ "s01": {
+  "duration": 23.97,
+  "phrases": [
+   {
+    "text": "In chapter one, your app gave the postmortem chunk a score. Zero point two one five two.",
+    "start": 0.6,
+    "end": 7.192
+   },
+   {
+    "text": "Where does that number come from?",
+    "start": 7.642,
+    "end": 9.498
+   },
+   {
+    "text": "By the end of this chapter, you'll calculate it by hand.",
+    "start": 9.948,
+    "end": 13.404
+   },
+   {
+    "text": "You need just three ideas. Sums. Averages. And weights.",
+    "start": 13.854,
+    "end": 17.843
+   },
+   {
+    "text": "No fear required. If you can write a for loop, you can do this.",
+    "start": 18.293,
+    "end": 22.517
+   }
+  ]
+ },
+ "s02": {
+  "duration": 29.73,
+  "phrases": [
+   {
+    "text": "Let's start with fractions.",
+    "start": 0.6,
+    "end": 2.435
+   },
+   {
+    "text": "One over two means one divided by two. A half.",
+    "start": 2.885,
+    "end": 6.639
+   },
+   {
+    "text": "The reciprocal of a number is one divided by that number.",
+    "start": 7.089,
+    "end": 10.951
+   },
+   {
+    "text": "The reciprocal of one is one. Of two, a half. Of four, a quarter. Of ten, a tenth.",
+    "start": 11.401,
+    "end": 17.31
+   },
+   {
+    "text": "Notice the pattern. The bigger the number, the smaller its reciprocal.",
+    "start": 17.76,
+    "end": 22.133
+   },
+   {
+    "text": "That is perfect for rankings. First place gets the most. Tenth place gets very little.",
+    "start": 22.583,
+    "end": 28.279
+   }
+  ]
+ },
+ "s03": {
+  "duration": 31.01,
+  "phrases": [
+   {
+    "text": "Next, sums. Adding up a list.",
+    "start": 0.6,
+    "end": 2.819
+   },
+   {
+    "text": "Remember the five paragraph lengths from chapter two?",
+    "start": 3.269,
+    "end": 6.639
+   },
+   {
+    "text": "Forty seven, plus one forty one, plus two oh eight, plus one oh two, plus two oh four. Seven hundred and two.",
+    "start": 7.089,
+    "end": 14.321
+   },
+   {
+    "text": "Mathematicians write this with one Greek letter. Sigma.",
+    "start": 14.771,
+    "end": 18.355
+   },
+   {
+    "text": "It means: add up everything that follows.",
+    "start": 18.805,
+    "end": 21.643
+   },
+   {
+    "text": "The i equals one underneath says, start at item one. The five on top says, stop at item five.",
+    "start": 22.093,
+    "end": 29.559
+   }
+  ]
+ },
+ "s04": {
+  "duration": 19.4,
+  "phrases": [
+   {
+    "text": "As a programmer, you already know sigma.",
+    "start": 0.6,
+    "end": 3.181
+   },
+   {
+    "text": "It is a loop.",
+    "start": 3.631,
+    "end": 4.911
+   },
+   {
+    "text": "The total starts at zero.",
+    "start": 5.361,
+    "end": 7.132
+   },
+   {
+    "text": "For each item in the list, the total plus equals that item.",
+    "start": 7.582,
+    "end": 11.593
+   },
+   {
+    "text": "When the loop ends, the total is the sum. Sigma is just a for loop, written in one symbol.",
+    "start": 12.043,
+    "end": 17.952
+   }
+  ]
+ },
+ "s05": {
+  "duration": 29.62,
+  "phrases": [
+   {
+    "text": "Now, averages.",
+    "start": 0.6,
+    "end": 2.008
+   },
+   {
+    "text": "An average, also called the mean, is the sum divided by how many items there are.",
+    "start": 2.458,
+    "end": 8.303
+   },
+   {
+    "text": "Seven hundred and two, divided by five, is one hundred forty point four.",
+    "start": 8.753,
+    "end": 14.279
+   },
+   {
+    "text": "In symbols: sigma of x, over n. The sum, over the count.",
+    "start": 14.729,
+    "end": 19.209
+   },
+   {
+    "text": "Notice, no paragraph is exactly one hundred forty point four characters long. An average is a summary of the whole list.",
+    "start": 19.659,
+    "end": 28.171
+   }
+  ]
+ },
+ "s06": {
+  "duration": 34.98,
+  "phrases": [
+   {
+    "text": "Sometimes, items are not equally important.",
+    "start": 0.6,
+    "end": 3.757
+   },
+   {
+    "text": "A weight is a multiplier that says how much each item counts.",
+    "start": 4.207,
+    "end": 8.218
+   },
+   {
+    "text": "Think of a school grade. The exam counts zero point seven. Homework counts zero point three.",
+    "start": 8.668,
+    "end": 15.431
+   },
+   {
+    "text": "You score eighty on the exam, and one hundred on homework.",
+    "start": 15.881,
+    "end": 19.678
+   },
+   {
+    "text": "Zero point seven times eighty is fifty six. Zero point three times one hundred is thirty. Total, eighty six.",
+    "start": 20.128,
+    "end": 28.32
+   },
+   {
+    "text": "Multiply each item by its weight, then add. That is a weighted sum.",
+    "start": 28.77,
+    "end": 33.527
+   }
+  ]
+ },
+ "s07": {
+  "duration": 32.67,
+  "phrases": [
+   {
+    "text": "Your app uses weights too.",
+    "start": 0.6,
+    "end": 2.413
+   },
+   {
+    "text": "When it fuses its three search methods, vector and keyword each count one.",
+    "start": 2.863,
+    "end": 7.621
+   },
+   {
+    "text": "The graph counts zero point five. Half as much, because its top pick is noisier.",
+    "start": 8.071,
+    "end": 13.617
+   },
+   {
+    "text": "Now let's combine everything into the formula your app actually runs.",
+    "start": 14.067,
+    "end": 18.739
+   },
+   {
+    "text": "For each method, take its weight, and divide it by k plus the chunk's rank.",
+    "start": 19.189,
+    "end": 24.16
+   },
+   {
+    "text": "Then sigma: add the results up. k is a constant. Here, ten. This is reciprocal rank fusion.",
+    "start": 24.61,
+    "end": 31.223
+   }
+  ]
+ },
+ "s08": {
+  "duration": 32.89,
+  "phrases": [
+   {
+    "text": "Let's calculate the postmortem chunk.",
+    "start": 0.6,
+    "end": 2.989
+   },
+   {
+    "text": "Vector search ranked it first. One, over ten plus one. Zero point zero nine zero nine.",
+    "start": 3.439,
+    "end": 10.458
+   },
+   {
+    "text": "Keyword search also ranked it first. Another zero point zero nine zero nine.",
+    "start": 10.908,
+    "end": 16.54
+   },
+   {
+    "text": "The graph ranked it fifth, with weight one half. Zero point five, over fifteen. Zero point zero three three three.",
+    "start": 16.99,
+    "end": 25.139
+   },
+   {
+    "text": "Add them up. Zero point two one five two.",
+    "start": 25.589,
+    "end": 28.875
+   },
+   {
+    "text": "Exactly the number your app showed.",
+    "start": 29.325,
+    "end": 31.437
+   }
+  ]
+ },
+ "s09": {
+  "duration": 33.27,
+  "phrases": [
+   {
+    "text": "One more, to be sure. The Ledger Billing Service chunk.",
+    "start": 0.6,
+    "end": 4.355
+   },
+   {
+    "text": "Vector rank two. One over twelve. Zero point zero eight three three.",
+    "start": 4.805,
+    "end": 10.117
+   },
+   {
+    "text": "Keyword rank three. One over thirteen. Zero point zero seven six nine.",
+    "start": 10.567,
+    "end": 16.412
+   },
+   {
+    "text": "Graph rank one, half weight. Zero point five over eleven. Zero point zero four five five.",
+    "start": 16.862,
+    "end": 24.115
+   },
+   {
+    "text": "Total: zero point two zero five seven. Second place, just behind. The math decides the order.",
+    "start": 24.565,
+    "end": 31.819
+   }
+  ]
+ },
+ "s10": {
+  "duration": 34.98,
+  "phrases": [
+   {
+    "text": "Why add k at all?",
+    "start": 0.6,
+    "end": 2.243
+   },
+   {
+    "text": "k controls how much a top rank beats a lower one.",
+    "start": 2.693,
+    "end": 6.213
+   },
+   {
+    "text": "With k equal to ten, first place scores one over eleven, and ninth place one over nineteen. First is worth about one point seven times as much.",
+    "start": 6.663,
+    "end": 17.799
+   },
+   {
+    "text": "With the classic k of sixty, it is one over sixty one against one over sixty nine. Barely different.",
+    "start": 18.249,
+    "end": 25.609
+   },
+   {
+    "text": "Your app only compares about twenty candidates per method, so it uses ten, and lets the top ranks matter.",
+    "start": 26.059,
+    "end": 33.525
+   }
+  ]
+ },
+ "s11": {
+  "duration": 36.13,
+  "phrases": [
+   {
+    "text": "Averages also grade your system.",
+    "start": 0.6,
+    "end": 2.989
+   },
+   {
+    "text": "For each test question, find the rank of the correct chunk, and take its reciprocal.",
+    "start": 3.439,
+    "end": 8.879
+   },
+   {
+    "text": "Then average across all the questions. That is mean reciprocal rank. M R R.",
+    "start": 9.329,
+    "end": 15.153
+   },
+   {
+    "text": "Hybrid search scored one point zero. The correct chunk came first, every time.",
+    "start": 15.603,
+    "end": 21.193
+   },
+   {
+    "text": "Vector alone scored zero point nine four four. Across twelve questions, its reciprocals add up to about eleven point three three. So at least once, the right chunk was not first.",
+    "start": 21.643,
+    "end": 34.677
+   }
+  ]
+ },
+ "s12": {
+  "duration": 20.32,
+  "phrases": [
+   {
+    "text": "And here is the number in your app.",
+    "start": 0.6,
+    "end": 2.84
+   },
+   {
+    "text": "The postmortem chunk, at the top of the sources panel.",
+    "start": 3.29,
+    "end": 6.959
+   },
+   {
+    "text": "Its three ranks. Vector one. Keyword one. Graph five.",
+    "start": 7.409,
+    "end": 11.185
+   },
+   {
+    "text": "And its fused score. Zero point two one five two. The same number you just calculated by hand.",
+    "start": 11.635,
+    "end": 18.867
+   }
+  ]
+ },
+ "s13": {
+  "duration": 21.64,
+  "phrases": [
+   {
+    "text": "To recap.",
+    "start": 0.6,
+    "end": 1.645
+   },
+   {
+    "text": "A reciprocal is one divided by a number.",
+    "start": 2.095,
+    "end": 5.082
+   },
+   {
+    "text": "Sigma means add them up. It's a for loop.",
+    "start": 5.532,
+    "end": 8.412
+   },
+   {
+    "text": "An average is the sum over the count. A weight says how much each item counts.",
+    "start": 8.862,
+    "end": 14.153
+   },
+   {
+    "text": "Next chapter: keyword search, and one more friendly piece of math. The logarithm.",
+    "start": 14.603,
+    "end": 20.192
+   }
+  ]
+ }
+}

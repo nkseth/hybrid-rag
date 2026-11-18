@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s10-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s10-def { position: absolute; left: 150px; top: 190px; font-size: 38px; color: #52525b; font-weight: 500; opacity: 0; }
+    .s10-blk { position: absolute; left: 150px; width: 1620px; opacity: 0; }
+    .s10-blk h4 { font-family: "JetBrains Mono", monospace; font-size: 44px; font-weight: 700; margin-bottom: 16px; }
+    .s10-bar { display: flex; align-items: center; height: 70px; margin-bottom: 10px; font-family: "JetBrains Mono", monospace; font-size: 34px; }
+    .s10-bar span { width: 200px; font-family: Inter, sans-serif; font-weight: 600; font-size: 32px; }
+    .s10-bar i { display: block; height: 52px; border-radius: 8px; transform-origin: left center; }
+    .s10-bar em { font-style: normal; margin-left: 20px; color: #52525b; }
+    #s10-a i { background: #2563eb; }
+    #s10-b i { background: #a1a1aa; }
+    .s10-x { position: absolute; left: 1380px; top: 70px; font-family: "JetBrains Mono", monospace; font-size: 72px; font-weight: 700; }
+    #s10-a .s10-x { color: #2563eb; }
+    #s10-b .s10-x { color: #71717a; }
+    #s10-end { position: absolute; left: 150px; top: 940px; font-size: 40px; font-weight: 700; opacity: 0; }
+    #s10-end b { color: #2563eb; }
+  </style>
+  <div id="root" data-composition-id="s10" data-width="1920" data-height="1080">
+    <div id="s10-t">Why add k?</div>
+    <div id="s10-def">k controls how much a top rank beats a lower one</div>
+    <div class="s10-blk" id="s10-a" style="top:300px"><h4>k = 10</h4>
+      <div class="s10-bar"><span>1st place</span><i style="width:900px"></i><em>1/11 = 0.091</em></div>
+      <div class="s10-bar"><span>9th place</span><i style="width:521px"></i><em>1/19 = 0.053</em></div>
+      <div class="s10-x">×1.7</div></div>
+    <div class="s10-blk" id="s10-b" style="top:600px"><h4>k = 60</h4>
+      <div class="s10-bar"><span>1st place</span><i style="width:900px"></i><em>1/61 = 0.0164</em></div>
+      <div class="s10-bar"><span>9th place</span><i style="width:796px"></i><em>1/69 = 0.0145</em></div>
+      <div class="s10-x">×1.13</div></div>
+    <div id="s10-end" data-hold>About 20 candidates per method → <b>k = 10</b> lets the top ranks matter</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s10-t", 0.05, 0.25);
+      inB("#s10-def", 2.693);
+      const blk = (b, t) => {
+        tl.fromTo(b, { opacity: 0 }, { opacity: 1, duration: 0.3 }, t);
+        tl.fromTo(`${b} .s10-bar i`, { scaleX: 0 }, { scaleX: 1, duration: 0.7, stagger: 1.6, ease: "expo.out" }, t + 0.8);
+        tl.fromTo(`${b} .s10-bar em`, { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 1.6 }, t + 1.2);
+        tl.fromTo(`${b} .s10-x`, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, t + 4.6);
+      };
+      blk("#s10-a", 6.663);
+      blk("#s10-b", 18.249);
+      inB("#s10-end", 26.659);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 34.63);
+      window.__timelines["s10"] = tl;
+    })();
+  </script>
+</template>

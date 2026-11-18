@@ -1,0 +1,112 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s10-size, #s10-cost, #s10-focus, #s10-train { opacity: 0; }
+    #s10-q { position: absolute; left: 150px; right: 150px; top: 110px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.12; }
+    #s10-q span { color: #71717a; }
+    .s10-word { position: absolute; left: 150px; top: 380px; font-size: 140px; font-weight: 800; letter-spacing: -0.04em; }
+    .s10-says { position: absolute; left: 150px; top: 560px; width: 560px; font-size: 38px; color: #52525b; font-weight: 500; line-height: 1.35; }
+    .s10-num { position: absolute; left: 150px; top: 330px; font-family: "JetBrains Mono", monospace; font-size: 34px; color: #a1a1aa; }
+    /* size: a fixed window and a growing stack */
+    #s10-win { position: absolute; left: 900px; top: 300px; width: 520px; height: 620px; border: 5px solid #09090b; border-radius: 16px; }
+    #s10-winlabel { position: absolute; left: 900px; top: 940px; width: 520px; text-align: center; font-size: 30px; font-weight: 600; }
+    .s10-pg { position: absolute; left: 960px; width: 400px; height: 50px; background: #f4f4f5; border: 1.5px solid #d4d4d8; border-radius: 8px; }
+    #s10-more { position: absolute; left: 1460px; top: 250px; font-size: 40px; font-weight: 700; color: #dc2626; }
+    /* cost: the formula */
+    #s10-formula { position: absolute; left: 860px; top: 470px; font-size: 52px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; }
+    #s10-formula i { font-style: normal; color: #a1a1aa; margin: 0 14px; }
+    #s10-formula small { display: block; font-size: 34px; color: #71717a; font-weight: 500; margin-top: 16px; }
+    /* focus: one paragraph in a haystack */
+    #s10-hay { position: absolute; left: 900px; top: 270px; width: 840px; height: 680px; }
+    #s10-hay b { display: block; height: 12px; background: #e4e4e7; border-radius: 4px; margin-bottom: 14px; }
+    #s10-hay b.s10-needle { background: #2563eb; height: 14px; }
+    /* retrain vs RAG */
+    #s10-q2 { position: absolute; left: 150px; top: 110px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    .s10-lane { position: absolute; left: 150px; width: 1620px; height: 240px; border-radius: 18px; padding: 34px 44px; }
+    #s10-l1 { top: 300px; background: #fafafa; border: 1.5px solid #e4e4e7; }
+    #s10-l2 { top: 600px; border: 2.5px solid #2563eb; }
+    .s10-lane h4 { font-size: 44px; font-weight: 700; }
+    .s10-lane p { max-width: 760px; font-size: 36px; color: #52525b; margin-top: 14px; font-weight: 500; }
+    .s10-steps { position: absolute; right: 44px; top: 30px; display: flex; gap: 18px; align-items: center; font-size: 32px; font-weight: 600; }
+    .s10-steps span { border: 1.5px solid #d4d4d8; border-radius: 10px; padding: 14px 20px; background: #fff; }
+    .s10-steps i { font-style: normal; color: #a1a1aa; }
+    #s10-l2 .s10-steps span { border-color: #2563eb; color: #2563eb; }
+  </style>
+  <div id="root" data-composition-id="s10" data-width="1920" data-height="1080">
+    <div id="s10-q" data-hold>Why not paste <span>every</span> document into the prompt?</div>
+    <div id="s10-size">
+      <div class="s10-num">1 / 3</div>
+      <div class="s10-word">Size</div>
+      <div class="s10-says" data-hold>A model can only read so much at once</div>
+      <div id="s10-win"></div>
+      <div id="s10-winlabel">what the model can read at once</div>
+      <div class="s10-pg" style="top:860px"></div><div class="s10-pg" style="top:800px"></div><div class="s10-pg" style="top:740px"></div><div class="s10-pg" style="top:680px"></div><div class="s10-pg" style="top:620px"></div><div class="s10-pg" style="top:560px"></div><div class="s10-pg" style="top:500px"></div>
+      <div class="s10-pg s10-x" style="top:440px"></div><div class="s10-pg s10-x" style="top:380px"></div><div class="s10-pg s10-x" style="top:320px"></div><div class="s10-pg s10-x" style="top:260px"></div>
+      <div id="s10-more">thousands of documents</div>
+    </div>
+    <div id="s10-cost">
+      <div class="s10-num">2 / 3</div>
+      <div class="s10-word">Cost</div>
+      <div class="s10-says">You pay for every token read, on every question</div>
+      <div id="s10-formula">cost<i>≈</i>tokens per question<br><i style="margin-left:0">×</i>price per token<br><i style="margin-left:0">×</i>number of questions<small>More text in the prompt multiplies every bill</small></div>
+    </div>
+    <div id="s10-focus">
+      <div class="s10-num">3 / 3</div>
+      <div class="s10-word">Focus</div>
+      <div class="s10-says">The right paragraph gets lost in a thousand pages</div>
+      <div id="s10-hay" data-layout-ignore data-hold></div>
+    </div>
+    <div id="s10-train">
+      <div id="s10-q2" data-hold>Why not train the model on them?</div>
+      <div class="s10-lane" data-hold id="s10-l1"><h4>Retrain</h4><p>Slow and expensive, and repeated on every change</p><div class="s10-steps"><span>document changes</span><i>→</i><span>retrain model</span><i>→</i><span>repeat</span></div></div>
+      <div class="s10-lane" id="s10-l2"><h4>RAG</h4><p>Searchable minutes after it arrives</p><div class="s10-steps"><span>document arrives</span><i>→</i><span>chunk</span><i>→</i><span>searchable</span></div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const hay = document.querySelector("#s10-hay");
+      for (let i = 0; i < 26; i++) { const b = document.createElement("b"); b.style.width = `${60 + ((i * 37) % 40)}%`; if (i === 17) b.className = "s10-needle"; hay.appendChild(b); }
+      const tl = gsap.timeline({ paused: true });
+      const inB = (sel, t, d = 0.3) => tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      const out = (sel, t) => tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in" }, t);
+      inB("#s10-q", 0.05, 0.25);
+      tl.fromTo("#s10-q span", { color: "#71717a" }, { color: "#dc2626", duration: 0.3 }, 3.2);
+      // Size
+      tl.set("#s10-size", { opacity: 1 }, 8.056);
+      tl.to("#s10-q", { scale: 0.62, transformOrigin: "left top", color: "#71717a", duration: 0.6, ease: "power3.inOut" }, 6.426);
+      inB("#s10-size .s10-num", 8.156);
+      inB("#s10-size .s10-word", 8.156);
+      inB("#s10-size .s10-says", 8.956);
+      tl.fromTo("#s10-win", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 8.556);
+      inB("#s10-winlabel", 8.956);
+      tl.fromTo("#s10-size .s10-pg", { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.35, ease: "expo.out" }, 9.756);
+      tl.to("#s10-size .s10-x", { borderColor: "#dc2626", background: "#fef2f2", duration: 0.3, stagger: 0.1 }, 12.656);
+      inB("#s10-more", 13.156);
+      out("#s10-size", 15.879);
+      // Cost
+      tl.set("#s10-cost", { opacity: 1 }, 16.179);
+      inB("#s10-cost .s10-num", 16.179);
+      inB("#s10-cost .s10-word", 16.179);
+      inB("#s10-cost .s10-says", 16.479);
+      inB("#s10-formula", 16.779, 0.4);
+      out("#s10-cost", 20.681);
+      // Focus
+      tl.set("#s10-focus", { opacity: 1 }, 20.981);
+      inB("#s10-focus .s10-num", 20.981);
+      inB("#s10-focus .s10-word", 20.981);
+      inB("#s10-focus .s10-says", 21.581);
+      tl.fromTo("#s10-hay b", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.05 }, 21.781);
+      tl.fromTo(".s10-needle", { scaleX: 1 }, { scaleX: 1.04, transformOrigin: "left center", duration: 0.4, ease: "back.out(1.4)" }, 24.381);
+      out(["#s10-focus", "#s10-q"], 27.297);
+      // Retrain vs RAG
+      tl.set("#s10-train", { opacity: 1 }, 27.597);
+      inB("#s10-q2", 27.597);
+      tl.fromTo("#s10-l1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 31.567);
+      tl.fromTo("#s10-l1 .s10-steps > *", { opacity: 0 }, { opacity: 1, duration: 0.25, stagger: 0.3 }, 32.367);
+      tl.fromTo("#s10-l2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 37.67);
+      tl.fromTo("#s10-l2 .s10-steps > *", { opacity: 0 }, { opacity: 1, duration: 0.25, stagger: 0.3 }, 38.47);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 42.93);
+      window.__timelines["s10"] = tl;
+    })();
+  </script>
+</template>

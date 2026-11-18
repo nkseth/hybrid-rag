@@ -1,0 +1,14 @@
+[
+  { "question": "Who founded Kestrel Dynamics?", "expected_source": "Company Overview", "reference": "Amara Okafor and Tomas Lindqvist founded it in 2019." },
+  { "question": "Which team owns the Ledger billing service?", "expected_source": "Ledger Billing", "reference": "The Platform team owns Ledger." },
+  { "question": "Who leads the team that owns the Atlas API gateway?", "expected_source": "Platform Team", "reference": "Priya Raman leads the Platform team, which owns Atlas." },
+  { "question": "What caused the billing delay in March 2026?", "expected_source": "Postmortem", "reference": "An expired TLS certificate on the Atlas API gateway caused authentication failures for Ledger." },
+  { "question": "How often do database credentials rotate?", "expected_source": "Security Policy", "reference": "Every 30 days." },
+  { "question": "What does Flightpath charge per van?", "expected_source": "Ledger Billing", "reference": "18 euros per van per month, with a 10% discount above 500 vans." },
+  { "question": "Who leads the Data team and what warehouse do they own?", "expected_source": "Routing and Data", "reference": "Lena Kowalski leads the Data team, which owns the Prism warehouse." },
+  { "question": "What does the Routing team's solver use?", "expected_source": "Routing and Data", "reference": "Google OR-Tools." },
+  { "question": "Which service does Ledger depend on for authentication?", "expected_source": "Ledger Billing", "reference": "The Atlas API gateway." },
+  { "question": "Who runs production access reviews?", "expected_source": "Security Policy", "reference": "Hana Sato, the Platform team's security champion." },
+  { "question": "What CI/CD system do new engineers get access to?", "expected_source": "Onboarding", "reference": "Orion." },
+  { "question": "Who was on call when the Atlas certificate expired?", "expected_source": "Postmortem", "reference": "Marco Silva." }
+]

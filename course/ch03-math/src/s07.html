@@ -1,0 +1,47 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s07-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s07-chips { position: absolute; left: 150px; top: 220px; display: flex; gap: 24px; }
+    .s07-chip { font-family: "JetBrains Mono", monospace; font-size: 40px; font-weight: 700; border: 3px solid currentColor; border-radius: 12px; padding: 10px 24px; opacity: 0; }
+    #s07-cv { color: #2563eb; } #s07-ck { color: #d97706; } #s07-cg { color: #0d9488; }
+    #s07-why { position: absolute; left: 150px; top: 330px; font-size: 34px; color: #52525b; font-weight: 500; opacity: 0; }
+    #s07-form { position: absolute; left: 150px; top: 470px; display: flex; align-items: center; gap: 34px; font-family: "JetBrains Mono", monospace; font-size: 96px; font-weight: 700; }
+    .frac { display: inline-flex; flex-direction: column; align-items: center; }
+    .frac span:first-child { border-bottom: 7px solid currentColor; padding: 0 20px; }
+    #s07-sig { font-size: 150px; font-weight: 400; }
+    #s07-score, #s07-sig, #s07-fr { opacity: 0; }
+    .s07-lab { position: absolute; font-size: 32px; font-weight: 700; color: #2563eb; opacity: 0; }
+    #s07-name { position: absolute; left: 150px; top: 920px; font-size: 44px; font-weight: 800; opacity: 0; }
+    #s07-name span { color: #2563eb; }
+  </style>
+  <div id="root" data-composition-id="s07" data-width="1920" data-height="1080">
+    <div id="s07-t">Your app's weights</div>
+    <div id="s07-chips"><div class="s07-chip" id="s07-cv">vector · 1</div><div class="s07-chip" id="s07-ck">keyword · 1</div><div class="s07-chip" id="s07-cg">graph · 0.5</div></div>
+    <div id="s07-why">The graph counts half: its top pick is noisier</div>
+    <div id="s07-form"><span id="s07-score">score =</span><span id="s07-sig">Σ</span><span class="frac" id="s07-fr"><span id="s07-w">w</span><span id="s07-kr">k + rank</span></span></div>
+    <div class="s07-lab" id="s07-l1" style="left:560px;top:720px">add up over the 3 methods</div>
+    <div class="s07-lab" id="s07-l2" style="left:990px;top:420px">the method's weight</div>
+    <div class="s07-lab" id="s07-l3" style="left:990px;top:800px">k = 10, rank = position in that list</div>
+    <div id="s07-name" data-hold>This is <span>Reciprocal Rank Fusion</span> (RRF)</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s07-t", 0.05, 0.25);
+      tl.fromTo(["#s07-cv", "#s07-ck"], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.8, ease: "expo.out" }, {c1+1.2});
+      tl.fromTo("#s07-cg", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, {c2});
+      inB("#s07-why", {c2+2.2});
+      inB("#s07-score", {c3+1});
+      tl.fromTo("#s07-fr", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, {c4});
+      inB("#s07-l2", {c4+1.2});
+      inB("#s07-l3", {c4+2.6});
+      tl.fromTo("#s07-sig", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, {c5});
+      inB("#s07-l1", {c5+0.6});
+      inB("#s07-name", {c5+4});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s07"] = tl;
+    })();
+  </script>
+</template>

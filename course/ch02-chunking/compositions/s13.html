@@ -1,0 +1,33 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s13-k { position: absolute; left: 150px; top: 180px; font-size: 40px; color: #71717a; font-weight: 600; }
+    #s13-l1 { position: absolute; left: 150px; top: 260px; font-size: 84px; font-weight: 700; letter-spacing: -0.03em; }
+    .s13-step { position: absolute; left: 150px; font-size: 52px; font-weight: 700; letter-spacing: -0.02em; }
+    .s13-step i { font-style: normal; font-family: "JetBrains Mono", monospace; color: #2563eb; margin-right: 26px; }
+    #s13-next { position: absolute; left: 150px; top: 330px; width: 1620px; height: 420px; border: 2.5px solid #09090b; border-radius: 20px; padding: 56px 64px; }
+    #s13-next h6 { font-size: 36px; color: #71717a; font-weight: 600; }
+    #s13-next h2 { font-size: 92px; font-weight: 800; letter-spacing: -0.04em; margin-top: 12px; }
+    #s13-next p { font-size: 40px; color: #52525b; font-weight: 500; margin-top: 20px; font-family: "JetBrains Mono", monospace; }
+  </style>
+  <div id="root" data-composition-id="s13" data-width="1920" data-height="1080">
+    <div id="s13-k">To recap</div>
+    <div id="s13-l1">Chunks are the pieces we search.</div>
+    <div class="s13-step" id="s13-s1" style="top:450px"><i>1</i>Cut at paragraphs</div>
+    <div class="s13-step" id="s13-s2" style="top:550px"><i>2</i>Pack up to 600 characters</div>
+    <div class="s13-step" id="s13-s3" style="top:650px"><i>3</i>Overlap by one sentence</div>
+    <div id="s13-next" data-hold><h6>Next · Chapter 3</h6><h2>The math you need</h2><p>Σ sums · averages · weights</p></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s13-k", 0.05, 0.25);
+      inB("#s13-l1", 2.095);
+      tl.fromTo(".s13-step", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, stagger: 1.6, ease: "expo.out" }, 4.687);
+      tl.to(["#s13-k", "#s13-l1", ".s13-step"], { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in" }, 10.077);
+      tl.fromTo("#s13-next", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, 10.377);
+      window.__timelines["s13"] = tl;
+    })();
+  </script>
+</template>

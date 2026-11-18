@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s05-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s05-def { position: absolute; left: 150px; top: 190px; font-size: 38px; color: #52525b; font-weight: 500; opacity: 0; }
+    #s05-calc { position: absolute; left: 150px; top: 300px; font-family: "JetBrains Mono", monospace; font-size: 80px; font-weight: 700; opacity: 0; }
+    #s05-calc b { color: #2563eb; }
+    #s05-form { position: absolute; left: 150px; top: 480px; display: flex; align-items: center; gap: 30px; font-family: "JetBrains Mono", monospace; font-size: 72px; font-weight: 700; opacity: 0; }
+    .frac { display: inline-flex; flex-direction: column; align-items: center; }
+    .frac span:first-child { border-bottom: 6px solid currentColor; padding: 0 16px; }
+    #s05-flab { position: absolute; left: 150px; top: 720px; font-size: 34px; color: #71717a; font-weight: 600; opacity: 0; }
+    #s05-chart { position: absolute; left: 1050px; top: 260px; width: 720px; height: 520px; border-bottom: 3px solid #09090b; }
+    .s05-bar { position: absolute; bottom: 0; width: 100px; background: #d4d4d8; border-radius: 6px 6px 0 0; transform-origin: bottom center; }
+    .s05-bl { position: absolute; bottom: -46px; width: 100px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 28px; color: #52525b; }
+    #s05-mean { position: absolute; left: 1040px; top: 499px; width: 740px; border-top: 5px dashed #2563eb; opacity: 0; }
+    #s05-meanl { position: absolute; left: 1050px; top: 455px; font-family: "JetBrains Mono", monospace; font-size: 32px; font-weight: 700; color: #2563eb; opacity: 0; }
+    #s05-note { position: absolute; left: 150px; top: 880px; width: 1620px; font-size: 40px; font-weight: 700; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s05" data-width="1920" data-height="1080">
+    <div id="s05-t">Averages</div>
+    <div id="s05-def">The mean: the sum divided by how many items</div>
+    <div id="s05-calc">702 ÷ 5 = <b>140.4</b></div>
+    <div id="s05-form"><span>mean =</span><span class="frac"><span>Σ x</span><span>n</span></span><span style="font-family:Inter,sans-serif;font-size:40px;color:#71717a;font-weight:600">the sum, over the count</span></div>
+    <div id="s05-chart">
+      <div class="s05-bar" style="left:20px;height:94px"></div><div class="s05-bl" style="left:20px">47</div>
+      <div class="s05-bar" style="left:160px;height:282px"></div><div class="s05-bl" style="left:160px">141</div>
+      <div class="s05-bar" style="left:300px;height:416px"></div><div class="s05-bl" style="left:300px">208</div>
+      <div class="s05-bar" style="left:440px;height:204px"></div><div class="s05-bl" style="left:440px">102</div>
+      <div class="s05-bar" style="left:580px;height:408px"></div><div class="s05-bl" style="left:580px">204</div>
+    </div>
+    <div id="s05-mean"></div>
+    <div id="s05-meanl">mean 140.4</div>
+    <div id="s05-note" data-hold>No paragraph is exactly 140.4 long. An average summarizes the whole list.</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s05-t", 0.05, 0.25);
+      tl.fromTo(".s05-bar", { scaleY: 0 }, { scaleY: 1, duration: 0.6, stagger: 0.12, ease: "expo.out" }, 0.4);
+      inB("#s05-def", {c1});
+      inB("#s05-calc", {c2});
+      // Mean line: 140.4 characters at 2 px per character above the axis (axis at 780, line at 780 - 281).
+      tl.fromTo("#s05-mean", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, transformOrigin: "left center", duration: 0.7, ease: "power3.inOut" }, {c2+3.6});
+      inB("#s05-meanl", {c2+4.1});
+      inB("#s05-form", {c3});
+      inB("#s05-note", {c4+1});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s05"] = tl;
+    })();
+  </script>
+</template>

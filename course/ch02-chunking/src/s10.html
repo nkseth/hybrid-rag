@@ -1,0 +1,66 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s10-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s10-doc { position: absolute; left: 150px; top: 330px; width: 220px; height: 280px; border: 1.5px solid #e4e4e7; border-radius: 12px; box-shadow: 0 12px 32px rgba(9,9,11,.08); padding: 22px; background: #fff; }
+    #s10-doc h5 { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+    #s10-doc b { display: block; height: 8px; background: #e4e4e7; border-radius: 3px; margin-bottom: 12px; }
+    #s10-label { position: absolute; left: 150px; top: 680px; font-family: "JetBrains Mono", monospace; font-size: 32px; padding: 14px 20px; border: 2.5px solid #09090b; border-radius: 10px; }
+    #s10-label i { font-style: normal; color: #2563eb; font-weight: 700; }
+    #s10-plus { position: absolute; left: 260px; top: 620px; font-size: 48px; font-weight: 700; color: #71717a; }
+    .s10-ar { position: absolute; height: 6px; background: #09090b; transform-origin: left center; }
+    .s10-ar::after { content: ""; position: absolute; right: -6px; top: -12px; border-left: 22px solid #09090b; border-top: 15px solid transparent; border-bottom: 15px solid transparent; }
+    #s10-fn { position: absolute; left: 860px; top: 400px; width: 300px; height: 160px; border: 3px solid #09090b; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; font-size: 36px; font-weight: 700; }
+    #s10-fn small { font-family: Inter, sans-serif; font-size: 28px; color: #71717a; font-weight: 500; }
+    .s10-hash { position: absolute; left: 1270px; top: 440px; font-family: "JetBrains Mono", monospace; font-size: 44px; font-weight: 700; }
+    #s10-h2 { color: #dc2626; }
+    #s10-hl { position: absolute; left: 1270px; top: 510px; font-size: 28px; color: #71717a; width: 520px; }
+    #s10-verdict { position: absolute; left: 1270px; top: 620px; font-size: 44px; font-weight: 800; }
+    #s10-v1 { color: #71717a; }
+    #s10-v2 { color: #2563eb; }
+  </style>
+  <div id="root" data-composition-id="s10" data-width="1920" data-height="1080">
+    <div id="s10-t">Changing the size later</div>
+    <div id="s10-doc"><h5>Postmortem</h5><b></b><b></b><b style="width:70%"></b><b></b><b style="width:60%"></b></div>
+    <div id="s10-plus">+</div>
+    <div id="s10-label">bge-small-q8 | chunk-<i id="s10-n6">600</i><i id="s10-n8">800</i>-100b | graph-v2</div>
+    <div class="s10-ar" id="s10-a1" style="left:400px;top:478px;width:430px"></div>
+    <div id="s10-fn">SHA-256<small>fingerprint</small></div>
+    <div class="s10-ar" id="s10-a2" style="left:1180px;top:478px;width:70px"></div>
+    <div class="s10-hash" id="s10-h1">76bafb757953…</div>
+    <div class="s10-hash" id="s10-h2">0582a1d38b3e…</div>
+    <div id="s10-hl">first 12 characters, computed from the file text</div>
+    <div id="s10-verdict"><span id="s10-v1">same → skip</span></div>
+    <div id="s10-verdict2" style="position:absolute;left:1270px;top:620px;font-size:44px;font-weight:800;color:#2563eb">changed → re-chunk</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      const out = (s, t) => tl.to(s, { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in" }, t);
+      inB("#s10-t", 0.05, 0.25);
+      tl.fromTo("#s10-doc", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, {c1});
+      tl.fromTo("#s10-a1", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.inOut" }, {c1+1});
+      tl.fromTo("#s10-fn", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, {c1+1.4});
+      tl.fromTo("#s10-a2", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.4, ease: "power3.inOut" }, {c1+2.2});
+      inB("#s10-h1", {c1+2.5});
+      inB("#s10-hl", {c1+3});
+      inB("#s10-verdict", {c2+1.6});
+      // The version label is mixed in.
+      out("#s10-verdict", {c3-0.3});
+      tl.set("#s10-n8", { display: "none" }, 0);
+      tl.fromTo(["#s10-plus", "#s10-label"], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, {c3+2.5});
+      // Change 600 → 800: the fingerprint changes.
+      tl.to("#s10-n6", { opacity: 0, duration: 0.2 }, {c4+2.4});
+      tl.set("#s10-n6", { display: "none" }, {c4+2.6});
+      tl.set("#s10-n8", { display: "inline" }, {c4+2.6});
+      tl.fromTo("#s10-n8", { opacity: 0, color: "#dc2626" }, { opacity: 1, color: "#dc2626", duration: 0.3 }, {c4+2.6});
+      out("#s10-h1", {c4+3.4});
+      inB("#s10-h2", {c4+3.7});
+      tl.set("#s10-verdict2", { opacity: 0 }, 0);
+      inB("#s10-verdict2", {c4+5.5});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s10"] = tl;
+    })();
+  </script>
+</template>

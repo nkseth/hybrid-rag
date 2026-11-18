@@ -1,0 +1,51 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s09-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s09-sub { position: absolute; left: 150px; top: 180px; font-size: 32px; color: #71717a; font-weight: 500; }
+    .s09-row { position: absolute; left: 150px; width: 1620px; }
+    .s09-lab { font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 700; margin-bottom: 14px; }
+    .s09-lab span { font-family: Inter, sans-serif; font-size: 30px; font-weight: 600; margin-left: 20px; }
+    .s09-bars { display: flex; gap: 14px; }
+    .s09-c { height: 92px; border-radius: 10px; border: 2px solid #d4d4d8; background: #f4f4f5; padding: 10px 14px; font-size: 28px; line-height: 1.3; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; position: relative; }
+    .s09-c em { display: block; font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 28px; font-weight: 700; color: #52525b; }
+    .s09-c.bad { border-color: #dc2626; background: #fef2f2; }
+    .s09-c.good { border-color: #2563eb; background: #eff6ff; }
+    .s09-c.blob { border-color: #a1a1aa; background: #e4e4e7; }
+    #s09-r1 { top: 270px; } #s09-r2 { top: 500px; } #s09-r3 { top: 730px; }
+    #s09-r1 .s09-lab span { color: #dc2626; } #s09-r2 .s09-lab span { color: #2563eb; } #s09-r3 .s09-lab span { color: #71717a; }
+    #s09-end { position: absolute; left: 150px; top: 960px; font-size: 36px; font-weight: 700; }
+    #s09-end span { color: #2563eb; }
+  </style>
+  <div id="root" data-composition-id="s09" data-width="1920" data-height="1080">
+    <div id="s09-t">Same document, three sizes</div>
+    <div id="s09-sub">The real chunker, run on the postmortem · bar width = chunk length</div>
+    <div class="s09-row" id="s09-r1"><div class="s09-lab">size 200 → 4 chunks<span>sentences split, pieces start mid-thought</span></div>
+      <div class="s09-bars"><div class="s09-c" style="width:266px"><em>190</em># Postmortem: Ledger…</div><div class="s09-c bad" style="width:336px"><em>240</em>late but no invoice amounts…</div><div class="s09-c bad" style="width:207px"><em>148</em>retried until it…</div><div class="s09-c" style="width:322px"><em>230</em>Hana Sato renewed…</div></div></div>
+    <div class="s09-row" id="s09-r2"><div class="s09-lab">size 600 → 2 chunks<span>each a complete thought</span></div>
+      <div class="s09-bars"><div class="s09-c good" style="width:706px"><em>504</em># Postmortem: Ledger Billing Delay (March 2026)…</div><div class="s09-c good" style="width:336px"><em>240</em>Hana Sato renewed the…</div></div></div>
+    <div class="s09-row" id="s09-r3"><div class="s09-lab">size 2000 → 1 chunk<span>the whole document: precise search is gone</span></div>
+      <div class="s09-bars"><div class="s09-c blob" style="width:994px"><em>710</em>everything, in one piece</div></div></div>
+    <div id="s09-end" data-hold>No perfect number: <span>measure it with evals (Chapter 10)</span></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s09-t", 0.05, 0.25);
+      inB("#s09-sub", 2.2);
+      const row = (r, t) => {
+        tl.fromTo(`${r} .s09-lab`, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, t);
+        tl.fromTo(`${r} .s09-c`, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, transformOrigin: "left center", duration: 0.6, stagger: 0.25, ease: "expo.out" }, t + 0.4);
+        tl.set(`${r} .s09-lab span`, { opacity: 0 }, 0);
+        inB(`${r} .s09-lab span`, t + 2.4);
+      };
+      row("#s09-r1", 6.981);
+      row("#s09-r2", 14.599);
+      row("#s09-r3", 19.657);
+      inB("#s09-end", 25.12);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 31.81);
+      window.__timelines["s09"] = tl;
+    })();
+  </script>
+</template>

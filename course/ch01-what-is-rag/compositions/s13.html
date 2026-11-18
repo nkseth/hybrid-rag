@@ -1,0 +1,41 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    .w { display: inline-block; }
+    #s13-k { position: absolute; left: 150px; top: 200px; font-size: 40px; color: #71717a; font-weight: 600; }
+    #s13-l1 { position: absolute; left: 150px; right: 150px; top: 290px; font-size: 76px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.12; }
+    #s13-l2 { position: absolute; left: 150px; right: 150px; top: 410px; font-size: 76px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.12; color: #2563eb; }
+    #s13-l3 { position: absolute; left: 150px; top: 680px; font-size: 56px; font-weight: 700; letter-spacing: -0.02em; }
+    #s13-l3 span { color: #2563eb; }
+    #s13-next { position: absolute; left: 150px; top: 330px; width: 1620px; height: 420px; border: 2.5px solid #09090b; border-radius: 20px; padding: 56px 64px; }
+    #s13-next h6 { font-size: 36px; color: #71717a; font-weight: 600; }
+    #s13-next h2 { font-size: 96px; font-weight: 800; letter-spacing: -0.04em; margin-top: 12px; }
+    #s13-next p { font-size: 40px; color: #52525b; font-weight: 500; margin-top: 20px; }
+    #s13-cut { position: absolute; right: 70px; top: 70px; width: 300px; height: 280px; }
+    #s13-cut b { position: absolute; left: 0; width: 300px; height: 80px; background: #f4f4f5; border: 1.5px solid #d4d4d8; border-radius: 10px; }
+  </style>
+  <div id="root" data-composition-id="s13" data-width="1920" data-height="1080">
+    <div id="s13-k">One idea to keep</div>
+    <div id="s13-l1">The model does not learn your documents.</div>
+    <div id="s13-l2">Every time, we find the right pages and hand them over.</div>
+    <div id="s13-l3">That is RAG: <span>an open-book exam for AI</span></div>
+    <div id="s13-next" data-hold><h6>Next · Chapter 2</h6><h2>Chunking</h2><p>How documents are cut into pieces, and why the cut matters</p>
+      <div id="s13-cut"><b style="top:0"></b><b style="top:100px"></b><b style="top:200px"></b></div></div>
+  </div>
+  <script>
+    (function () {
+      const split = (el) => { el.innerHTML = el.textContent.split(" ").map((w) => `<span class="w">${w}</span>`).join(" "); return el.querySelectorAll(".w"); };
+      const w1 = split(document.querySelector("#s13-l1"));
+      const w2 = split(document.querySelector("#s13-l2"));
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s13-k", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 0.05);
+      tl.fromTo(w1, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.1 }, 2.586);
+      tl.fromTo(w2, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.1 }, 5.681);
+      tl.fromTo("#s13-l3", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power4.out" }, 10.429);
+      tl.to(["#s13-k", "#s13-l1", "#s13-l2", "#s13-l3"], { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in" }, 13.833);
+      tl.fromTo("#s13-next", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, 14.133);
+      tl.fromTo("#s13-cut b", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.2, ease: "expo.out" }, 15.333);
+      window.__timelines["s13"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,56 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    .w { display: inline-block; }
+    #s08-title { position: absolute; left: 150px; top: 110px; font-size: 76px; font-weight: 700; letter-spacing: -0.03em; }
+    #s08-title b { color: #2563eb; }
+    #s08-prompt { position: absolute; left: 150px; top: 360px; width: 300px; height: 380px; background: #fafafa; border: 1.5px solid #e4e4e7; border-radius: 14px; padding: 26px; }
+    #s08-prompt b { display: block; height: 8px; background: #d4d4d8; border-radius: 3px; margin-bottom: 16px; }
+    #s08-prompt h6 { font-family: "JetBrains Mono", monospace; font-size: 28px; margin-bottom: 20px; }
+    #s08-tokens { position: absolute; left: 150px; top: 770px; width: 300px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 700; }
+    #s08-tokens small { display: block; font-family: Inter, sans-serif; font-size: 28px; font-weight: 500; color: #71717a; }
+    #s08-arrow { position: absolute; left: 480px; top: 545px; width: 120px; height: 6px; background: #09090b; transform-origin: left center; }
+    #s08-arrow::after { content: ""; position: absolute; right: -6px; top: -12px; border-left: 22px solid #09090b; border-top: 15px solid transparent; border-bottom: 15px solid transparent; }
+    #s08-llm { position: absolute; left: 630px; top: 410px; width: 280px; height: 280px; border: 3px solid #09090b; border-radius: 26px; background: #fff; padding: 36px; }
+    #s08-llm b { display: block; height: 6px; background: #d4d4d8; border-radius: 3px; margin-bottom: 20px; }
+    #s08-llm h6 { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 40px; }
+    #s08-ans { position: absolute; left: 970px; top: 300px; width: 800px; background: #f4f4f5; border-radius: 22px 22px 22px 6px; padding: 34px 40px; font-size: 38px; line-height: 1.42; font-weight: 500; }
+    #s08-cite { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; color: #fff; background: #2563eb; border-radius: 8px; padding: 0 10px; margin-left: 6px; }
+    #s08-src { position: absolute; left: 970px; top: 840px; width: 800px; border: 2.5px solid #2563eb; border-radius: 14px; background: #fff; padding: 22px 28px; font-size: 30px; line-height: 1.4; }
+    #s08-src h6 { font-size: 28px; color: #2563eb; font-weight: 700; margin-bottom: 6px; }
+    #s08-link { position: absolute; left: 1360px; top: 790px; width: 4px; height: 50px; background: #2563eb; transform-origin: top center; }
+  </style>
+  <div id="root" data-composition-id="s08" data-width="1920" data-height="1080">
+    <div id="s08-title" data-hold><b>G</b> · Generate</div>
+    <div id="s08-prompt"><h6>prompt</h6><b></b><b style="width:80%"></b><b></b><b></b><b style="width:60%"></b><b></b><b style="width:75%"></b><b></b></div>
+    <div id="s08-tokens">815 tokens<small>read by the model</small></div>
+    <div id="s08-arrow"></div>
+    <div id="s08-llm"><b></b><b></b><b></b><b style="width:70%"></b><h6>LLM</h6></div>
+    <div id="s08-ans"><span id="s08-a1">The billing delay was caused by an expired TLS certificate on the Atlas API gateway,</span> <span id="s08-a2">which led to authentication failures and caused the Ledger billing job to retry until it exhausted its retry budget.</span><span id="s08-cite">1</span></div>
+    <div id="s08-link"></div>
+    <div id="s08-src"><h6>Passage [1] · Postmortem</h6>Root cause: an expired TLS certificate on the Atlas API gateway caused authentication failures.</div>
+  </div>
+  <script>
+    (function () {
+      const split = (el) => { el.innerHTML = el.textContent.split(" ").map((w) => `<span class="w">${w}</span>`).join(" "); return el.querySelectorAll(".w"); };
+      const a1 = split(document.querySelector("#s08-a1"));
+      const a2 = split(document.querySelector("#s08-a2"));
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s08-title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power4.out" }, 0.05);
+      tl.fromTo("#s08-prompt", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 0.4);
+      tl.fromTo("#s08-llm", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" }, {c1});
+      tl.fromTo("#s08-arrow", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.inOut" }, {c1+0.5});
+      tl.fromTo("#s08-tokens", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, {c1+1.2});
+      tl.fromTo("#s08-ans", { opacity: 0 }, { opacity: 1, duration: 0.3 }, {c2-0.2});
+      tl.set(["#s08-cite", "#s08-src", "#s08-link"], { opacity: 0 }, 0);
+      tl.fromTo(a1, { opacity: 0 }, { opacity: 1, duration: 0.05, stagger: 0.28, ease: "none" }, {c2});
+      tl.fromTo(a2, { opacity: 0 }, { opacity: 1, duration: 0.05, stagger: 0.17, ease: "none" }, {c3});
+      tl.fromTo("#s08-cite", { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, {c4+1.2});
+      tl.to("#s08-ans", { y: -40, duration: 0.6, ease: "power3.inOut" }, {c5});
+      tl.fromTo("#s08-link", { opacity: 1, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.4, ease: "power3.inOut" }, {c5+0.4});
+      tl.fromTo("#s08-src", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, {c5+0.7});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s08"] = tl;
+    })();
+  </script>
+</template>

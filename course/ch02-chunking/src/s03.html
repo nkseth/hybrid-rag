@@ -1,0 +1,47 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s03-t { position: absolute; left: 150px; top: 110px; font-size: 76px; font-weight: 700; letter-spacing: -0.03em; }
+    #s03-tiles { position: absolute; left: 150px; top: 290px; display: flex; gap: 12px; }
+    .s03-tile { width: 96px; height: 120px; border: 2.5px solid #09090b; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 56px; font-weight: 700; position: relative; }
+    .s03-tile small { position: absolute; bottom: -46px; font-family: "JetBrains Mono", monospace; font-size: 28px; color: #71717a; font-weight: 500; }
+    .s03-tile.sp { border-style: dashed; color: #a1a1aa; font-size: 30px; }
+    #s03-count { position: absolute; left: 150px; top: 500px; font-size: 38px; font-weight: 600; color: #52525b; }
+    #s03-big { position: absolute; left: 150px; top: 600px; font-family: "JetBrains Mono", monospace; font-size: 150px; font-weight: 700; letter-spacing: -0.04em; }
+    #s03-big small { font-family: Inter, sans-serif; font-size: 44px; font-weight: 600; color: #52525b; letter-spacing: 0; margin-left: 24px; }
+    #s03-card { position: absolute; left: 1000px; top: 660px; width: 770px; height: 290px; border: 2.5px solid #2563eb; border-radius: 16px; background: #fff; padding: 30px; }
+    #s03-card b { display: block; height: 12px; background: #dbeafe; border-radius: 4px; margin-bottom: 18px; }
+    #s03-ov { position: absolute; left: 1000px; top: 660px; width: 130px; height: 290px; background: rgba(37, 99, 235, 0.14); border-radius: 16px 0 0 16px; border-right: 4px dashed #2563eb; }
+    #s03-ovl { position: absolute; left: 1000px; top: 975px; width: 770px; font-size: 32px; font-weight: 600; color: #2563eb; }
+    #s03-ruler { position: absolute; left: 1000px; top: 615px; width: 770px; font-family: "JetBrains Mono", monospace; font-size: 28px; color: #71717a; display: flex; justify-content: space-between; }
+  </style>
+  <div id="root" data-composition-id="s03" data-width="1920" data-height="1080">
+    <div id="s03-t">How big is a piece?</div>
+    <div id="s03-tiles">
+      <div class="s03-tile">L<small>1</small></div><div class="s03-tile">e<small>2</small></div><div class="s03-tile">d<small>3</small></div><div class="s03-tile">g<small>4</small></div><div class="s03-tile">e<small>5</small></div><div class="s03-tile">r<small>6</small></div><div class="s03-tile sp">space<small>7</small></div><div class="s03-tile">j<small>8</small></div><div class="s03-tile">o<small>9</small></div><div class="s03-tile">b<small>10</small></div><div class="s03-tile">.<small>11</small></div>
+    </div>
+    <div id="s03-count">Letters, spaces and punctuation each count as one character</div>
+    <div id="s03-big">600<small>characters per chunk</small></div>
+    <div id="s03-ruler"><span>0</span><span>600</span></div>
+    <div id="s03-card"><b></b><b></b><b style="width:85%"></b><b></b><b style="width:70%"></b><b></b><b style="width:60%"></b></div>
+    <div id="s03-ov"></div>
+    <div id="s03-ovl">up to 100 characters repeated from the previous chunk</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s03-t", 0.05, 0.25);
+      tl.fromTo(".s03-tile", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.18, ease: "expo.out" }, {c1});
+      inB("#s03-count", {c1+2.6});
+      tl.fromTo("#s03-big", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, transformOrigin: "left center", duration: 0.6, ease: "expo.out" }, {c2});
+      inB("#s03-ruler", {c3});
+      tl.fromTo("#s03-card", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, {c3});
+      tl.fromTo("#s03-card b", { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", duration: 0.5, stagger: 0.12, ease: "expo.out" }, {c3+0.3});
+      tl.fromTo("#s03-ov", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, transformOrigin: "left center", duration: 0.5, ease: "power3.inOut" }, {c4+0.6});
+      inB("#s03-ovl", {c4+1});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s03"] = tl;
+    })();
+  </script>
+</template>

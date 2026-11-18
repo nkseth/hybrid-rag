@@ -1,0 +1,43 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s08-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s08-t span { color: #71717a; }
+    .s08-r { position: absolute; left: 150px; width: 1620px; display: flex; align-items: center; font-family: "JetBrains Mono", monospace; font-size: 56px; font-weight: 700; opacity: 0; }
+    .s08-r .m { width: 330px; font-family: Inter, sans-serif; font-size: 44px; }
+    .s08-r .rk { width: 300px; font-size: 40px; color: #52525b; }
+    .s08-r .f { width: 520px; }
+    .s08-r .v { color: #2563eb; }
+    #s08-r1 .m { color: #2563eb; } #s08-r2 .m { color: #d97706; } #s08-r3 .m { color: #0d9488; }
+    #s08-line { position: absolute; left: 1290px; top: 700px; width: 480px; border-top: 5px solid #09090b; opacity: 0; }
+    #s08-sum { position: absolute; left: 150px; top: 730px; width: 1620px; display: flex; font-family: "JetBrains Mono", monospace; font-size: 80px; font-weight: 700; opacity: 0; }
+    #s08-sum .m { width: 1150px; font-family: Inter, sans-serif; font-size: 48px; font-weight: 800; text-align: right; padding-right: 40px; align-self: center; }
+    #s08-sum .v { color: #2563eb; }
+    #s08-ok { position: absolute; left: 150px; top: 900px; font-size: 48px; font-weight: 800; color: #2563eb; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s08" data-width="1920" data-height="1080">
+    <div id="s08-t">Postmortem chunk, <span>by hand</span></div>
+    <div class="s08-r" id="s08-r1" style="top:260px"><span class="m">vector</span><span class="rk">rank 1</span><span class="f">1 ÷ (10 + 1)</span><span class="v">= 0.0909</span></div>
+    <div class="s08-r" id="s08-r2" style="top:400px"><span class="m">keyword</span><span class="rk">rank 1</span><span class="f">1 ÷ (10 + 1)</span><span class="v">= 0.0909</span></div>
+    <div class="s08-r" id="s08-r3" style="top:540px"><span class="m">graph</span><span class="rk">rank 5</span><span class="f">0.5 ÷ (10 + 5)</span><span class="v">= 0.0333</span></div>
+    <div id="s08-line"></div>
+    <div id="s08-sum"><span class="m">Σ</span><span class="v">= 0.2152</span></div>
+    <div id="s08-ok" data-hold>Exactly the number your app showed</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s08-t", 0.05, 0.25);
+      [["#s08-r1", 3.439], ["#s08-r2", 10.908], ["#s08-r3", 16.99]].forEach(([r, t]) => {
+        tl.fromTo(r, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, t);
+        tl.fromTo(`${r} .v`, { opacity: 0 }, { opacity: 1, duration: 0.3 }, t + 2.4);
+      });
+      tl.fromTo("#s08-line", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, transformOrigin: "left center", duration: 0.5, ease: "power3.inOut" }, 25.589);
+      tl.fromTo("#s08-sum", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, transformOrigin: "right center", duration: 0.5, ease: "expo.out" }, 26.189);
+      inB("#s08-ok", 29.325);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 32.54);
+      window.__timelines["s08"] = tl;
+    })();
+  </script>
+</template>

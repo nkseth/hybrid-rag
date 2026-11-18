@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s08-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    .s08-k { position: absolute; left: 150px; font-family: "JetBrains Mono", monospace; font-size: 30px; color: #71717a; }
+    .s08-h { position: absolute; left: 150px; font-size: 44px; font-weight: 700; }
+    #s08-long { position: absolute; left: 150px; top: 370px; width: 1620px; height: 70px; background: #f4f4f5; border: 1.5px solid #d4d4d8; border-radius: 10px; }
+    #s08-lim { position: absolute; left: 1230px; top: 350px; height: 110px; border-left: 5px dashed #dc2626; }
+    #s08-words { position: absolute; left: 150px; top: 490px; font-size: 44px; font-weight: 500; }
+    #s08-words .ok { display: inline-block; width: 6px; height: 64px; background: #2563eb; vertical-align: middle; margin: 0 10px; }
+    #s08-words .no { color: #dc2626; font-weight: 800; }
+    #s08-wl { position: absolute; left: 150px; top: 570px; font-size: 30px; color: #52525b; }
+    #s08-tail { position: absolute; left: 150px; top: 840px; display: flex; gap: 20px; align-items: center; }
+    #s08-tail div { height: 80px; border: 1.5px solid #d4d4d8; border-radius: 10px; background: #f4f4f5; font-family: "JetBrains Mono", monospace; font-size: 28px; display: flex; align-items: center; padding: 0 20px; }
+    #s08-tiny { position: relative; }
+    #s08-x { position: absolute; left: 0; top: 36px; width: 100%; height: 5px; background: #dc2626; transform-origin: left center; }
+    #s08-rule { position: absolute; left: 150px; top: 960px; font-family: "JetBrains Mono", monospace; font-size: 36px; font-weight: 700; }
+    #s08-rule b { color: #dc2626; }
+  </style>
+  <div id="root" data-composition-id="s08" data-width="1920" data-height="1080">
+    <div id="s08-t">Two more rules</div>
+    <div class="s08-k" id="s08-k1" style="top:240px">rule 1</div>
+    <div class="s08-h" id="s08-h1" style="top:280px">A paragraph longer than 600 characters</div>
+    <div id="s08-long"></div>
+    <div id="s08-lim"></div>
+    <div id="s08-words">… the billing job<span class="ok"></span>retried · not re<span class="no">|</span>tried</div>
+    <div id="s08-wl">Split at the spaces between words, never inside a word</div>
+    <div class="s08-k" id="s08-k2" style="top:690px">rule 2</div>
+    <div class="s08-h" id="s08-h2" style="top:730px">A tiny last chunk is dropped</div>
+    <div id="s08-tail"><div style="width:420px">chunk 1</div><div style="width:300px">chunk 2</div><div id="s08-tiny" style="width:150px">tiny<i id="s08-x"></i></div></div>
+    <div id="s08-rule">length ≤ 100 + 20 → <b>dropped</b></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s08-t", 0.05, 0.25);
+      inB(["#s08-k1", "#s08-h1"], {c1});
+      tl.fromTo("#s08-long", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, transformOrigin: "left center", duration: 0.8, ease: "expo.out" }, {c1+1});
+      tl.fromTo("#s08-lim", { opacity: 0 }, { opacity: 1, duration: 0.3 }, {c1+2});
+      inB("#s08-words", {c1+3.4});
+      inB("#s08-wl", {c1+4.6});
+      inB(["#s08-k2", "#s08-h2"], {c2});
+      tl.fromTo("#s08-tail > div", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.2, ease: "expo.out" }, {c2+1});
+      tl.fromTo("#s08-x", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.inOut" }, {c2+3.6});
+      tl.to("#s08-tiny", { opacity: 0.4, duration: 0.3 }, {c2+4});
+      inB("#s08-rule", {c2+4.2});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s08"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,47 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s07-title { position: absolute; left: 150px; top: 110px; font-size: 76px; font-weight: 700; letter-spacing: -0.03em; }
+    #s07-title b { color: #2563eb; }
+    #s07-sub { position: absolute; left: 150px; top: 210px; font-size: 34px; color: #71717a; font-weight: 500; }
+    #s07-page { position: absolute; left: 470px; top: 290px; width: 1300px; height: 520px; background: #fafafa; border: 1.5px solid #e4e4e7; border-radius: 16px; padding: 34px 40px; font-family: "JetBrains Mono", monospace; font-size: 28px; line-height: 1.4; color: #27272a; overflow: hidden; }
+    .s07-sec { margin-bottom: 22px; }
+    .s07-sec .dim { color: #a1a1aa; }
+    .s07-pass b { color: #2563eb; font-weight: 700; }
+    .s07-lbl { position: absolute; left: 150px; width: 290px; font-size: 34px; font-weight: 700; }
+    .s07-lbl::after { content: ""; position: absolute; left: 0; top: 50px; width: 220px; height: 4px; background: #09090b; }
+    #s07-lq { color: #09090b; }
+    .s07-q { color: #09090b; font-weight: 700; }
+  </style>
+  <div id="root" data-composition-id="s07" data-width="1920" data-height="1080">
+    <div id="s07-title" data-hold><b>A</b> · Augment</div>
+    <div id="s07-sub">The real prompt this project sends</div>
+    <div id="s07-page" data-layout-allow-overflow>
+      <div class="s07-sec" id="s07-rules">You answer questions using ONLY the numbered context passages provided.<br>- Cite the passages that support each claim inline, like [1] or [2][3].<br>- If the passages do not contain the answer, reply exactly: "I don't know based on the provided documents."</div>
+      <div class="s07-sec s07-pass" id="s07-p1"><b>[1]</b> (source: Postmortem: Ledger Billing Delay)<br><span class="dim">Root cause: an expired TLS certificate on the Atlas API gateway…</span></div>
+      <div class="s07-sec s07-pass" id="s07-p2"><b>[2]</b> (source: Ledger Billing Service) <span class="dim">Ledger depends on Atlas…</span></div>
+      <div class="s07-sec s07-pass" id="s07-p3"><b>[3]</b> … <b>[4]</b> … <b>[5]</b> … <b>[6]</b> <span class="dim">(four more passages)</span></div>
+      <div class="s07-sec s07-q" id="s07-qq">Question: What caused the billing delay in March 2026?</div>
+    </div>
+    <div class="s07-lbl" id="s07-l1" style="top:324px">Rules</div>
+    <div class="s07-lbl" id="s07-l2" style="top:503px">Passages</div>
+    <div class="s07-lbl" id="s07-lq" style="top:725px">Question</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s07-title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power4.out" }, 0.05);
+      tl.fromTo("#s07-sub", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 2.671);
+      tl.fromTo("#s07-page", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, 2.971);
+      tl.set([".s07-sec", ".s07-lbl"], { opacity: 0 }, 0);
+      tl.fromTo("#s07-l1", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 7.388);
+      tl.fromTo("#s07-rules", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.4 }, 7.588);
+      tl.fromTo("#s07-l2", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 15.499);
+      tl.fromTo(["#s07-p1", "#s07-p2", "#s07-p3"], { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.5, ease: "expo.out" }, 15.799);
+      tl.fromTo("#s07-lq", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 18.786);
+      tl.fromTo("#s07-qq", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 19.086);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 22.08);
+      window.__timelines["s07"] = tl;
+    })();
+  </script>
+</template>

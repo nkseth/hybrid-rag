@@ -1,0 +1,36 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s01-ch { position: absolute; left: 0; right: 0; top: 250px; text-align: center; font-size: 40px; color: #71717a; font-weight: 600; }
+    #s01-num { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 220px; font-weight: 700; letter-spacing: -0.04em; }
+    #s01-q { color: #2563eb; }
+    #s01-parts { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 72px; font-weight: 700; color: #a1a1aa; }
+    #s01-three { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-size: 72px; font-weight: 800; letter-spacing: -0.03em; }
+    #s01-three i { font-style: normal; color: #2563eb; font-family: "JetBrains Mono", monospace; margin-right: 18px; }
+    #s01-three span { margin: 0 40px; }
+    #s01-code { position: absolute; left: 0; right: 0; top: 820px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 40px; color: #52525b; }
+  </style>
+  <div id="root" data-composition-id="s01" data-width="1920" data-height="1080">
+    <div id="s01-ch">Chapter 3 · The math you need</div>
+    <div id="s01-num">0.2152<span id="s01-q">?</span></div>
+    <div id="s01-parts">= ? + ? + ?</div>
+    <div id="s01-three"><span><i>Σ</i>sums</span><span><i>÷</i>averages</span><span><i>w</i>weights</span></div>
+    <div id="s01-code">for (const x of list) total += x</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      const out = (s, t) => tl.to(s, { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in" }, t);
+      tl.fromTo("#s01-num", { scale: 1.04 }, { scale: 1, duration: 0.6, ease: "expo.out" }, 0);
+      tl.fromTo("#s01-q", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, 7.642);
+      inB("#s01-parts", 10.348);
+      out("#s01-parts", 13.554);
+      tl.fromTo("#s01-three span", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.7, ease: "expo.out" }, 15.254);
+      tl.to("#s01-ch", { opacity: 0, duration: 0.3 }, 17.993);
+      inB("#s01-code", 19.893);
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, 23.62);
+      window.__timelines["s01"] = tl;
+    })();
+  </script>
+</template>

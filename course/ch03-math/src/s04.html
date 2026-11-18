@@ -1,0 +1,55 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; color: #09090b; overflow: hidden; }
+    #s04-t { position: absolute; left: 150px; top: 90px; font-size: 64px; font-weight: 700; letter-spacing: -0.03em; }
+    #s04-code { position: absolute; left: 150px; top: 240px; width: 1000px; background: #fafafa; border: 1.5px solid #e4e4e7; border-radius: 16px; padding: 40px 48px; font-family: "JetBrains Mono", monospace; font-size: 40px; line-height: 1.6; }
+    #s04-code .k { color: #2563eb; font-weight: 700; }
+    #s04-code .c { color: #a1a1aa; }
+    #s04-tot { position: absolute; left: 1260px; top: 260px; width: 510px; text-align: center; }
+    #s04-tot h6 { font-size: 34px; color: #71717a; font-weight: 600; }
+    .s04-v { position: absolute; left: 0; right: 0; top: 60px; font-family: "JetBrains Mono", monospace; font-size: 140px; font-weight: 700; }
+    #s04-v5 { color: #2563eb; }
+    #s04-eq { position: absolute; left: 150px; top: 820px; font-size: 76px; font-weight: 800; letter-spacing: -0.03em; }
+    #s04-eq b { font-family: "JetBrains Mono", monospace; color: #2563eb; font-weight: 700; }
+  </style>
+  <div id="root" data-composition-id="s04" data-width="1920" data-height="1080">
+    <div id="s04-t">Σ is a for loop</div>
+    <div id="s04-code">
+      <div id="s04-l1"><span class="k">let</span> total = 0</div>
+      <div id="s04-l2"><span class="k">for</span> (<span class="k">const</span> x <span class="k">of</span> [47, 141, 208, 102, 204]) {</div>
+      <div id="s04-l3">&nbsp;&nbsp;total += x</div>
+      <div id="s04-l4">}</div>
+      <div id="s04-l5" class="c">// total is now 702</div>
+    </div>
+    <div id="s04-tot"><h6>total</h6>
+      <div class="s04-v" id="s04-v0">0</div><div class="s04-v" id="s04-v1">47</div><div class="s04-v" id="s04-v2">188</div><div class="s04-v" id="s04-v3">396</div><div class="s04-v" id="s04-v4">498</div><div class="s04-v" id="s04-v5">702</div>
+    </div>
+    <div id="s04-eq" data-hold><b>Σ</b> = a for loop in one symbol</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const inB = (s, t, d = 0.3) => tl.fromTo(s, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power4.out" }, t);
+      inB("#s04-t", 0.05, 0.25);
+      tl.fromTo("#s04-code", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, {c1});
+      tl.set(["#s04-l1", "#s04-l2", "#s04-l3", "#s04-l4", "#s04-l5", "#s04-tot h6"], { opacity: 0 }, 0);
+      inB("#s04-l1", {c2});
+      inB("#s04-tot h6", {c2});
+      inB(["#s04-l2", "#s04-l3", "#s04-l4"], {c3});
+      // The running total ticks through the loop.
+      const vals = ["#s04-v0", "#s04-v1", "#s04-v2", "#s04-v3", "#s04-v4", "#s04-v5"];
+      tl.set(vals, { opacity: 0 }, 0);
+      tl.set("#s04-v0", { opacity: 1 }, {c2+0.3});
+      vals.slice(1).forEach((v, i) => {
+        const t = {c3+1} + i * 0.7;
+        tl.set(vals[i], { opacity: 0 }, t);
+        tl.set(v, { opacity: 1 }, t);
+        tl.fromTo("#s04-l3", { backgroundColor: "rgba(219,234,254,1)" }, { backgroundColor: "rgba(219,234,254,0)", duration: 0.6 }, t);
+      });
+      inB("#s04-l5", {c4});
+      inB("#s04-eq", {c4+1.6});
+      tl.to("#root", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power3.in" }, {D-0.35});
+      window.__timelines["s04"] = tl;
+    })();
+  </script>
+</template>
